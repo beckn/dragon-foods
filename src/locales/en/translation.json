@@ -1,0 +1,32 @@
+{
+    "DEVELOPED_BY": "Developed by Tekdi Technologies",
+    "WEBSITE_TITLE_PART_ONE" : "Onest.",
+    "WEBSITE_TITLE_PART_TWO" : "Network",
+    "FILTER" : "Filter",
+    "FILTER_OPTIONS": "Filter Options",
+    "LOADING": "Loading...",
+    "GO_BACK":"Go Back",
+    "BACK":"Back",
+    "CONFIRM":"Confirm",
+    "VIEW_DETAILS":"View Details",
+
+    "WELCOME_BACK": "Welcome back",
+    "LET_MAKE_EASY": "Let's make farming easy",
+    "NAME": "Name",
+    "PASSWORD": "Password",
+    "SIGN_IN": "Sign In",
+    "SIGN_UP": "Sign Up",
+    "DONT_HAVE_ACCOUNT": "Don't have an account?",
+
+    "SEARCH_RESULT":" Search Results",
+    "SEARCH_FOR": "Search for",
+    "SEARCH": "Search",
+    "ENTER_LOCATION":"Enter location",
+    "FREQUESNTLY_BOUGHT": "Frequently Bought",
+    "STARS":"stars",
+
+    "ABOUT": "About",
+    "LICENSE_PROPRIETARY":"License : Proprietary"
+
+
+}
