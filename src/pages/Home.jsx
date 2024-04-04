@@ -1,39 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { Box, SimpleGrid, InputGroup, InputRightElement, Input, Flex } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  SimpleGrid,
+  InputGroup,
+  InputRightElement,
+  Input,
+  Flex,
+  IconButton,
+  Text,
+} from "@chakra-ui/react";
 import { IoIosSearch } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
-import CourseCard from '../components/CourseCard';
-import Pagination from '../components/Pagination';
-import {
-  getallContent,
-} from "../services/Apicall";
-import SearchScreen from './SearchScreen';
-import { v4 as uuidv4 } from 'uuid';
-import FilterButton from '../components/FilterButton';
-import axios from 'axios';
+import CourseCard from "../components/CourseCard";
+import Pagination from "../components/Pagination";
+import { getallContent } from "../services/Apicall";
+import SearchScreen from "./SearchScreen";
+import { v4 as uuidv4 } from "uuid";
+import FilterButton from "../components/FilterButton";
+import axios from "axios";
 const env = import.meta.env;
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
-import uiConfig from '../services/config.json'
+import uiConfig from "../services/config.json";
 import { useTranslation } from "react-i18next";
+import { MdFilterList } from "react-icons/md";
+import onSearch from "../assets/apiJson/on_search.json";
+import SubHeader from "../components/SubHeader";
 
 const Home = () => {
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [story, setStory] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [transactionId, setTransactionId] = useState(uuidv4());
   const [states, setStates] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState('');
-  const [searchPlaceholder, setSearchPlaceholder] = useState('Search...');   
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const [searchPlaceholder, setSearchPlaceholder] = useState("Search...");
+  const [items, setItems] = useState(onSearch);
 
   useEffect(() => {
     setLoading(true);
     searchResponse();
   }, []);
+
   const searchResponse = async () => {
-    console.log({env})
+    console.log({ env });
     let bodyData = {
       context: {
         domain: env?.VITE_DOMAIN,
@@ -87,19 +99,22 @@ const Home = () => {
       setStory(arrayOfObjects);
 
       // Extracting states from the response
-      const extractedStates = response.data[env?.VITE_DB_CACHE].map(provider => provider.state);
+      const extractedStates = response.data[env?.VITE_DB_CACHE].map(
+        (provider) => provider.state
+      );
       let allStates = [];
-      extractedStates.forEach(state => {
+      extractedStates.forEach((state) => {
         if (Array.isArray(state)) {
-          allStates.push(state.join(','));
+          allStates.push(state.join(","));
         } else {
           allStates.push(state);
         }
       });
-      const uniqueStates = [...new Set(allStates.join(',').split(','))];
-      const filteredStates = uniqueStates.filter(state => state && state !== "All");
+      const uniqueStates = [...new Set(allStates.join(",").split(","))];
+      const filteredStates = uniqueStates.filter(
+        (state) => state && state !== "All"
+      );
       setStates(filteredStates);
-
     } else {
       console.error("Invalid response format");
     }
@@ -113,10 +128,10 @@ const Home = () => {
   }, [selectedFilter]);
 
   const handleFilter = async () => {
-    console.log('Inside filter function');
+    console.log("Inside filter function");
     try {
-      let apiUrl = '';
-      if (selectedFilter === 'All') {
+      let apiUrl = "";
+      if (selectedFilter === "All") {
         searchResponse();
       } else {
         // Encode the selected filter value
@@ -124,22 +139,28 @@ const Home = () => {
         apiUrl = `${baseUrl}/${env?.VITE_API_ROUTE}/FilterByState?state=${encodedFilter}`;
       }
       const response = await axios.get(apiUrl);
-      if (response && response.data && response.data.data && response.data.data[env?.VITE_DB_CACHE]) {
+      if (
+        response &&
+        response.data &&
+        response.data.data &&
+        response.data.data[env?.VITE_DB_CACHE]
+      ) {
         setStory(response.data.data[env?.VITE_DB_CACHE]);
       } else {
         // Handle no data
       }
     } catch (error) {
-      console.error('Error performing search:', error);
+      console.error("Error performing search:", error);
     }
   };
+
   const handleResetSearch = () => {
     searchResponse();
-};
+  };
 
   //search functionality
   useEffect(() => {
-    const results = story.filter(item =>
+    const results = story.filter((item) =>
       item.title.toLowerCase().includes(inputValue.toLowerCase())
     );
     setSearchResults(results);
@@ -151,7 +172,7 @@ const Home = () => {
   };
 
   const handleClear = () => {
-    setInputValue('');
+    setInputValue("");
   };
 
   // Pagination configuration
@@ -168,66 +189,83 @@ const Home = () => {
   const filteredResults = inputValue.length > 0 ? searchResults : story;
   const visibleResults = filteredResults.slice(startIndex, endIndex);
 
-  // transaction id 
+  // transaction id
   console.log(`Home Page transaction id ${transactionId}`);
-  
-  // change placeholder based on filter value 
+
+  // change placeholder based on filter value
   useEffect(() => {
-    if (selectedFilter && selectedFilter !== 'All') {
+    if (selectedFilter && selectedFilter !== "All") {
       setSearchPlaceholder(`You are Searching in ${selectedFilter}`);
     } else {
-      setSearchPlaceholder(t('SEARCH'));
+      setSearchPlaceholder(t("SEARCH"));
     }
   }, [selectedFilter]);
+
   return (
-    <Box p={4} marginBottom="60px">
-      {/* search bar */}
-      <Flex alignItems="center">
-      {uiConfig?.isSearch && 
-        <InputGroup flex="1" mr={4}>
-          <Input
-            type="text"
-            placeholder={searchPlaceholder}
-            value={inputValue}
-            onChange={handleChange}
+    <>
+      <SubHeader title={t("Search Results")} cartItemCount={2} />
+      <Box p={4} marginBottom="60px" marginX={{ base: 4, md: 8, lg: 16 }}>
+        {/* search bar */}
+        <Flex alignItems="center">
+          {uiConfig?.isSearch && (
+            <InputGroup flex="1" mr={4}>
+              <Input
+                type="text"
+                placeholder={searchPlaceholder}
+                value={inputValue}
+                onChange={handleChange}
+              />
+              <InputRightElement onClick={handleClear} cursor="pointer">
+                {inputValue ? (
+                  <RxCrossCircled color="gray.300" />
+                ) : (
+                  <IoIosSearch color="gray.300" />
+                )}
+              </InputRightElement>
+            </InputGroup>
+          )}
+          {uiConfig?.isAdvFilter && (
+            <IconButton
+              aria-label="Filter"
+              icon={<MdFilterList />}
+              onClick={() => setSelectedFilter("")}
+              variant="ghost"
+              fontSize="24px"
+            />
+          )}
+        </Flex>
+
+        {inputValue.length > 0 ? (
+          <SearchScreen
+            searchText={visibleResults}
+            transactionId={transactionId}
           />
-          <InputRightElement onClick={handleClear} cursor="pointer">
-            {inputValue ? (
-              <RxCrossCircled color="gray.300" />
-            ) : (
-              <IoIosSearch color="gray.300" />
-            )}
-          </InputRightElement>
-        </InputGroup>
-      }
-     {uiConfig?.isAdvFilter && 
-        <FilterButton states={states} SelectedFilterOption={setSelectedFilter} ResetSearch={handleResetSearch} />
-        }
-      
-      </Flex>
+        ) : (
+          <>
+            <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
+              ** Price will vary based on the options selected
+            </Text>
+            <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
+              {items?.message?.catalog?.providers[0]?.items.map(
+                (product, index) => (
+                  <CourseCard
+                    key={index}
+                    product={product}
+                    transactionId={transactionId}
+                  />
+                )
+              )}
+            </SimpleGrid>
 
-      {inputValue.length > 0 ? (
-        <SearchScreen searchText={visibleResults} transactionId={transactionId}  />
-      ) : (
-        <>
-          <SimpleGrid columns={{ sm: 1, md: 2, lg: 2 }} spacing={4} pt={4}>
-            {visibleResults.map((product, index) => (
-              <CourseCard key={index} product={product} transactionId={transactionId} />
-            ))}
-          </SimpleGrid>
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredResults.length / itemsPerPage)}
-            handlePageChange={handlePageChange}
-          />
-        </>
-
-
-      )}
-
-
-    </Box>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(items.length / itemsPerPage)}
+              handlePageChange={handlePageChange}
+            />
+          </>
+        )}
+      </Box>
+    </>
   );
 };
 
