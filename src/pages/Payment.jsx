@@ -12,8 +12,8 @@ import visa from '../assets/images/visa.png';
 import master from '../assets/images/master.png';
 import netBank from '../assets/images/netBank.png';
 import paypal from '../assets/images/paypal.png';
-
-
+import ModalPleaseWait from '../components/ModalPleaseWait';
+import  SubHeader from '../components/SubHeader';
 
 
 const Payment = (item) => {
@@ -23,26 +23,45 @@ const Payment = (item) => {
   const navigate = useNavigate();
   const [selectedCard, setSelectedCard] = useState('');
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('paypal');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleCardSelection = (value) => {
     setSelectedPaymentMethod(''); // Deselect payment method when card is selected
-
     setSelectedCard(value);
   };
 
   const handlePaymentMethodSelection = (value) => {
     setSelectedCard(''); // Deselect card when payment method is selected
-
     setSelectedPaymentMethod(value);
   };
 
-    const doPayment = async() =>{
-    navigate('/success', {
-        state: { item: state?.item},
-      });
-}
+  const handleSuccess = () => {
+    setShowSuccessModal(true);
+  };
+
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+  };
+
+
+  const submitPayment = async () => {
+    setShowSuccessModal(true);
+
+    setTimeout(() => {
+      setShowSuccessModal(false);
+       navigate('/success', {
+      state: { item: state?.item },
+    });
+      
+    }, 2000);
+
+   
+  }
 
   return (
+    <>       
+     <SubHeader title={t('SELECT_PAYMENT_METHOD')} cartItemCount={2} />
+
     <Box mx={'100px'} mb={20}>
       <Box>
         <Text mb={5} mt={5} fontSize={17} fontWeight={400}>{t('SAVE_CARDS')}</Text>
@@ -81,7 +100,7 @@ const Payment = (item) => {
               <Flex justifyContent="space-between" alignItems="center">
                 <RadioGroup defaultValue="netBank" value={selectedPaymentMethod} onChange={handlePaymentMethodSelection}>
                   <Flex align="center">
-                    <Radio value="netBank">
+                    <Radio value="netBank" className={selectedPaymentMethod == 'netBank' ? 'checkedRadioButton' : ''}>
                       <Flex align="center">
                         <Image mr={4} src={netBank} alt="NetBank Logo" width="62px" height="35px" />
                         <Text fontSize={15} fontWeight={400}>
@@ -91,7 +110,7 @@ const Payment = (item) => {
                     </Radio>
                   </Flex>
                   <Flex align="center" mt={2}>
-                    <Radio value="paypal" color={buttonCss?.primaryBtnColor}>
+                    <Radio value="paypal" className={selectedPaymentMethod == 'paypal' ? 'checkedRadioButton' : ''}>
                       <Flex align="center">
                         <Image mr={4} src={paypal} alt="PayPal Logo" width="62px" height="35px" />
                         <Text fontSize={15} fontWeight={400}>
@@ -136,10 +155,18 @@ const Payment = (item) => {
           </Flex>
         </Flex>
       </Box>
-      <Button  mt={5} type="submit" onClick={doPayment} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
-                        {t('CONTINUE')}
-                    </Button>
+      <Button mt={5} type="submit" onClick={submitPayment} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
+        {t('CONTINUE')}
+      </Button>
+
+      {showSuccessModal && (
+        <ModalPleaseWait
+          message="Your success message goes here!"
+          onClose={handleCloseSuccessModal}
+        />
+      )}
     </Box>
+    </>
   );
 };
 

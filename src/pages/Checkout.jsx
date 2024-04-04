@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import dataList from '../assets/apiJson/checkoutForm.json';
 import { header, buttonCss } from "../styles/branding";
 import { useNavigate } from 'react-router-dom';
+import  SubHeader from '../components/SubHeader';
 
 const Checkout = (item) => {
     const { t } = useTranslation();
@@ -25,7 +26,10 @@ const Checkout = (item) => {
     }
 
     return (
-        <Box mx={'100px'} mb={20}>
+        <>
+        <SubHeader title={t('CHECKOUT')} cartItemCount={2} />
+
+        <Box mx={'100px'} mt={10}>
             <Box>
                 <Text mb={5} fontSize={17} fontWeight={400} >{t('ORDER_OVERVIEW')}</Text>
                 <Card p={5} boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)" >
@@ -80,6 +84,7 @@ const Checkout = (item) => {
                         {t('PROCEED_TO_PAYMENT')}
                     </Button>
         </Box>
+        </>
     );
 };
 

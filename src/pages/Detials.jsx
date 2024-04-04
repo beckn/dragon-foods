@@ -15,6 +15,7 @@ import { FaStar } from 'react-icons/fa';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import SubDetail from '../components/SubDetail';
 import { header, buttonCss } from "../styles/branding";
+import  SubHeader from '../components/SubHeader';
 
 
 const Details = () => {
@@ -141,6 +142,8 @@ const Details = () => {
 
   return (
     <>
+    <SubHeader title="Your Page Title" cartItemCount={2} />
+
       {isLoading ? (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
           <Box textAlign="center">
@@ -158,7 +161,7 @@ const Details = () => {
             </Text>
           </Box> */}
 
-          <Card mx={40} p={5}>
+          <Card mx={40} mt={30} p={5}>
             <HStack>
               <Box background="rgba(255, 255, 255, 1)" alignItems="stretch"
                 justifyContent="center" borderRadius="12px"

@@ -49,12 +49,10 @@ function Header() {
         </Flex>
 
         {/* Right-hand side */}
-        <Flex alignItems="center">
-          {/* <LangSelector /> */}
-        </Flex>
+     
       </Flex>
       {/* Add padding to the top to prevent content from being hidden */}
-      <Box paddingTop={20} /> 
+      <Box paddingTop='4rem' /> 
     </Box>
   );
 }

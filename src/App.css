@@ -12,3 +12,14 @@
 .custom-button:hover {
     background-color: #354F34 !important; 
 }
+
+
+.checkedRadioButton {
+    background-color: #00B088; /* Set your desired background color */
+  }
+
+  .css-vtg3j9[data-checked] {
+    background: #00B088 !important;
+    border-color:  #00B088;
+    color: var(--chakra-colors-white);
+}

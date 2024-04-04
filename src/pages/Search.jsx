@@ -5,6 +5,7 @@ import { header, buttonCss } from "../styles/branding";
 import onSearch from '../assets/apiJson/on_search.json';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import  SubHeader from '../components/SubHeader';
 
 const Search = () => {
     const { t } = useTranslation();
@@ -21,21 +22,11 @@ const Search = () => {
 
         navigate("/details", {
             state: { item: item, items: items },
-          });    
-        }
+        });
+    }
     return (
-        <>
-        <Flex
-        w="100%"
-        p={3}
-        height={5}
-        alignItems="center"
-        boxShadow="md"
-        position="fixed"
-        fontFamily="system-ui"
-        justifyContent="space-between"
-        zIndex={9999} 
-      ></Flex>
+        <Box>
+           <SubHeader  cartItemCount={2} back={false}  />
             <VStack mt={20}>
                 <Image
                     height={{ base: '80px', md: '80px' }}
@@ -116,7 +107,7 @@ const Search = () => {
                             boxShadow="7px 12px 0px rgba(0, 0, 0, 0.1)"
                             p={4}
                             mb={6}
-                            onClick={()=> goTodetailPage(item, items)}
+                            onClick={() => goTodetailPage(item, items)}
                         >
 
                             <VStack flex={1}>
@@ -149,7 +140,7 @@ const Search = () => {
                 </HStack>
             </Box>
 
-        </>
+            </Box>
     );
 };
 
