@@ -1,7 +1,7 @@
 {
     "isFilter": true,
     "isLogoInHeader": false,
-    "isFooter": true,
+    "isFooter": false,
     "filters": [
         {
             "label": "State",

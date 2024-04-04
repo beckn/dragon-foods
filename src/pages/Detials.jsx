@@ -14,6 +14,7 @@ const env = import.meta.env;
 import { FaStar } from 'react-icons/fa';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import SubDetail from '../components/SubDetail';
+import { header, buttonCss } from "../styles/branding";
 
 
 const Details = () => {
@@ -131,6 +132,13 @@ const Details = () => {
     navigate('/');
   };
 
+  const Submit = async () => {
+  
+    navigate("/checkout", {
+      state: { item: state?.item},
+    });   
+  }
+
   return (
     <>
       {isLoading ? (
@@ -150,7 +158,7 @@ const Details = () => {
             </Text>
           </Box> */}
 
-          <Card mx={20} p={5}>
+          <Card mx={40} p={5}>
             <HStack>
               <Box background="rgba(255, 255, 255, 1)" alignItems="stretch"
                 justifyContent="center" borderRadius="12px"
@@ -183,9 +191,18 @@ const Details = () => {
 
               </Box>
             </HStack>
-<Box mb={20}>
-            <SubDetail item={state?.item} items={state?.items} />
+            <Box >
+              <SubDetail item={state?.item} items={state?.items} />
             </Box>
+
+            <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
+                <HStack>
+                    <Button type="submit" onClick={Submit} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
+                        {t('ADD_TO_CART')}
+                    </Button>
+                    <Text fontSize={12} ml={4}>{t('PRICE_WILL_VARY')}</Text>
+                </HStack>
+            </Card>
 
           </Card>
 

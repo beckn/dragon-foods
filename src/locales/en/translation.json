@@ -26,7 +26,33 @@
     "STARS":"stars",
 
     "ABOUT": "About",
-    "LICENSE_PROPRIETARY":"License : Proprietary"
+    "LICENSE_PROPRIETARY":"License : Proprietary",
+    "ADD_TO_CART":"Add to Cart",
+    "PRICE_WILL_VARY":"** Price will vary based on the options selected",
 
+    "ORDER_OVERVIEW":"Order Overview",
+    "BILLING_DETAILS":"Billing Details",
+    "PAYMENT": "Payment",
+    "TOTAL":"Total",
+    "SUBTOTAL": "Subtotal",
+    "TAXES":"Taxes",
+    "CHANGE":"Change",
+    "PROCEED_TO_PAYMENT":"Proceed To Payment",
+    "PROVIDED_BY": "Provided by ",
 
+    "SAVE_CARDS":"Saved Cards",
+    "OTHER_PAYMENT_METHOD":"Other Payment Methods",
+    "ORDER_TOTAL_SUMMARY":"Order Total Summary",
+    "CONTINUE":"Continue",
+    "NET_BACKING":"Net Banking",
+    "PAYPAL":"PayPal",
+    "SELECT_PAYMENT_METHOD":"Select Payment Method",
+    "PLEASE_WAIT":"Please wait!",
+    "WE_PROCESS_YOUR_PAYMENT":"While we process your payment",
+
+    "ORDER_CONFIRMED":"Order confirmed!",
+    "SENT_YOUR_DATA_REPORT":"We have sent your data report on your requested email ID:",
+    "GO_BACK_HOME":"Go Back Home",
+    "ORDER_HISTORY":"Order History",
+    "VIEW_BALANCE":"View Balance"
 }

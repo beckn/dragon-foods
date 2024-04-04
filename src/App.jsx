@@ -9,6 +9,9 @@ import MediaPage from './pages/MediaPage';
 import Footer from './components/Footer';
 import React from 'react';
 import appConfig from './assets/ui-config/homeConfig.json';
+import Checkout from './pages/Checkout';
+import Payment from './pages/Payment';
+import SuccessPayment from './components/SuccessPayment';
 
 
 function App() {
@@ -21,6 +24,9 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/home" element={<Home />} />
           <Route path="/details" element={<Detials />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/success" element={<SuccessPayment />} />
           <Route path="/confirm/:itemId" element={<MediaPage />} />
         </Routes>
         {appConfig?.isFooter && <Footer />}

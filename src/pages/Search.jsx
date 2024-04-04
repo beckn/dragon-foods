@@ -49,7 +49,7 @@ const Search = () => {
                 </Text>
 
                 <Input
-                    boxShadow="rgb(50 50 93 / 8%) 6px 11px 9px 8px, rgba(0, 0, 0, 0.3) 0px 1px 0px 0px"
+                    boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
                     width='35rem'
                     height='56px'
                     id="searchTxt"
@@ -62,7 +62,7 @@ const Search = () => {
                     onChange={(e) => setSearchTxt(e.target.value)}
                 />
                 <Input
-                    boxShadow="rgb(50 50 93 / 8%) 6px 11px 9px 8px, rgba(0, 0, 0, 0.3) 0px 1px 0px 0px"
+                    boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
                     width='35rem'
                     height='56px'
                     id="location" mt={2}
@@ -76,7 +76,7 @@ const Search = () => {
                 />
 
                 <Input
-                    boxShadow="rgb(50 50 93 / 8%) 6px 11px 9px 8px, rgba(0, 0, 0, 0.3) 0px 1px 0px 0px"
+                    boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
                     width='35rem'
                     height='56px'
                     id="year"
@@ -93,7 +93,7 @@ const Search = () => {
                 </Button>
             </VStack>
 
-            <Box ml='27vw'>
+            <Box ml='29vw'>
                 <Text mt={10} mb={2}>
                     {t('FREQUESNTLY_BOUGHT')}
                 </Text>
@@ -103,7 +103,7 @@ const Search = () => {
 
                         <Card background={'#F6F6F6'}
                             display="flex"
-                            width={174}
+                            width={180}
                             height={234}
                             direction={{ base: "column", md: "row" }}
                             overflow="hidden"
