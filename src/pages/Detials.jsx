@@ -142,7 +142,7 @@ const Details = () => {
 
   return (
     <>
-    <SubHeader title="Your Page Title" cartItemCount={2} />
+    <SubHeader title={state?.item?.descriptor?.name} cartItemCount={2} />
 
       {isLoading ? (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -152,16 +152,8 @@ const Details = () => {
         </div>
       ) : (
         <>
-          {/* <Box w="100%" px={3} height={5} alignItems="center" boxShadow="md" position="fixed" justifyContent="center" pb={5}>
-            <Box display="flex" alignItems="center" padding="1rem" borderBottom="1px solid #e2e8f0" position="absolute" left="0">
-              <Icon as={IoChevronBack} boxSize={6} color="gray.500" />
-            </Box>
-            <Text className="search-results-text-style" flex="0 0 auto" font="400 17px Poppins, sans-serif" color="rgba(0, 0, 0, 1)">
-             {t('SEARCH_RESULT')}
-            </Text>
-          </Box> */}
-
-          <Card mx={40} mt={30} p={5}>
+         
+          <Card mx={'100px'} mt={30} p={5}>
             <HStack>
               <Box background="rgba(255, 255, 255, 1)" alignItems="stretch"
                 justifyContent="center" borderRadius="12px"
