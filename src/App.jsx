@@ -12,7 +12,7 @@ import appConfig from './assets/ui-config/homeConfig.json';
 import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import SuccessPayment from './components/SuccessPayment';
-
+import { Box } from '@chakra-ui/react';
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
           <Route path="/success" element={<SuccessPayment />} />
           <Route path="/confirm/:itemId" element={<MediaPage />} />
         </Routes>
-        {appConfig?.isFooter && <Footer />}
+        {appConfig?.isFooter && <Box mt={100}> <Footer /> </Box>}
       </Router>
     </>
   )
