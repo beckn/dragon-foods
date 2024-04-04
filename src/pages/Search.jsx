@@ -84,7 +84,7 @@ const Search = () => {
                 </Button>
             </VStack>
 
-            <Box ml='29vw'>
+            <VStack>
                 <Text mt={10} mb={2}>
                     {t('FREQUESNTLY_BOUGHT')}
                 </Text>
@@ -138,7 +138,7 @@ const Search = () => {
                         </Card>))}
 
                 </HStack>
-            </Box>
+            </VStack>
 
             </Box>
     );
