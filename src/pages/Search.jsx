@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
-import { Box, Button, Icon, Card, Input, Text, Image, VStack, Flex, HStack } from '@chakra-ui/react';
+import { Box, Button, Icon, Card, Input, Text, Image, VStack, Flex, HStack, Select } from '@chakra-ui/react';
 import { header, buttonCss } from "../styles/branding";
 import onSearch from '../assets/apiJson/on_search.json';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import  SubHeader from '../components/SubHeader';
+import SubHeader from '../components/SubHeader';
+import mapIcon from '../assets/images/map.svg'
 
 const Search = () => {
     const { t } = useTranslation();
@@ -15,30 +16,50 @@ const Search = () => {
     const [items, setItems] = useState(onSearch)
     const navigate = useNavigate();
 
+    const cityLocations = [
+        "Balaganj",
+        "Beanibazar",
+        "Bishwanath",
+        "Companiganj",
+        "Fenchuganj",
+        "Gopalganj",
+        "Gowanighat",
+        "Jaintiapur",
+        "Kanaighat",
+        "Sylhetsardar",
+        "Zakiganj",
+        "Dakshinsurma",
+        "Osmaninagar"
+    ]
+
+
     // useEffect(() => {
     //   }, []);
 
-    const goTodetailPage = (item, items) => {
+    const searchData = async () => {
+        console.log(searchTxt + ' - ' + year + ' - ' + location);
+        navigate("/home", {
+            state: { searchTxt: searchTxt, year: year, locationitems: location },
+        });
+    }
 
+    const goTodetailPage = (item, items) => {
         navigate("/details", {
             state: { item: item, items: items },
         });
     }
+    
     return (
         <Box>
-           <SubHeader  cartItemCount={2} back={false}  />
+            <SubHeader cartItemCount={2} back={false} />
             <VStack mt={20}>
                 <Image
-                    height={{ base: '80px', md: '80px' }}
-                    width={{ base: '80px', md: '80px' }}
+                    height='153px'
+                    width='333px'
                     src={header?.headerContent?.logoSrc}
                     alt="The house from the offer."
+                    mb={5}
                 />
-
-                <Text fontSize={50} fontWeight={700} color={header?.headerContent?.appTitleColor}>
-                    {header?.headerContent?.title1}
-                </Text>
-
                 <Input
                     boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
                     width='35rem'
@@ -52,34 +73,47 @@ const Search = () => {
                     fontSize={15}
                     onChange={(e) => setSearchTxt(e.target.value)}
                 />
-                <Input
+                <Select
                     boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
-                    width='35rem'
+                    width='36rem'
                     height='56px'
-                    id="location" mt={2}
-                    type="text"
+                    id="location"
+                    mt={2}
                     autoComplete="location"
                     value={location}
                     placeholder={t('ENTER_LOCATION')}
                     p={3}
                     fontSize={15}
                     onChange={(e) => setLocation(e.target.value)}
-                />
+                >
+                    {/* Placeholder option */}
 
-                <Input
+                    <option value="" disabled hidden>{t('ENTER_LOCATION')}</option>
+                    {cityLocations.map(city => (
+                        <option key={city} value={city}>
+                            {city}
+                        </option>
+                    ))}
+                </Select>
+
+                <Select
                     boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
-                    width='35rem'
+                    width='37rem'
                     height='56px'
                     id="year"
                     mt={2}
-                    type="text"
                     autoComplete="year"
                     value={year}
-                    p={3}
+                    p={4}
                     fontSize={15}
                     onChange={(e) => setYear(e.target.value)}
-                />
-                <Button marginTop={5} type="submit" width='35rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
+                >
+                    {/* Generate options from 1 to 10 years */}
+                    {[...Array(10)].map((_, index) => (
+                        <option key={index + 1} value={index + 1}>{index + 1} year{index !== 0 && 's'}</option>
+                    ))}
+                </Select>
+                <Button marginTop={5} onClick={searchData} type="submit" width='35rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
                     {t('SEARCH')}
                 </Button>
             </VStack>
@@ -105,33 +139,36 @@ const Search = () => {
                             _hover={{ borderColor: "blue.400" }}
                             cursor="pointer"
                             boxShadow="7px 12px 0px rgba(0, 0, 0, 0.1)"
-                            p={4}
                             mb={6}
                             onClick={() => goTodetailPage(item, items)}
                         >
 
                             <VStack flex={1}>
-                                <Box >
+                                <Box height='132px' >
                                     <Image
-                                        height={{ base: '100px', md: '100px' }}
-                                        width={{ base: '100%', md: '100%' }}
+                                    mt={5}
+                                        height='100px'
+                                        width='100px'
                                         src={item?.descriptor?.images[0].url}
                                         alt="The house from the offer."
                                     />
                                 </Box>
-                                <Box>
-                                    <Text fontSize={15} noOfLines={1} fontWeight="bold" mb={2}>{item?.descriptor?.name}</Text>
-                                    <HStack>
+                                <Box bg={'#FFF'}  borderRadius="lg"  height='132px'>
+                                    <Box p={2}>
 
-                                        <Text noOfLines={1} fontSize={12} mb={2}>Provided by: {items?.message?.catalog?.providers[0]?.descriptor?.name}</Text>
-                                    </HStack>
-                                    <HStack>
-                                        <Text fontSize={12} noOfLines={2} mb={2}>7 years in operation</Text>
-                                        <HStack display="flex" alignItems="center">
-                                            <Icon as={FaStar} color="#F4B73F" />
-                                            <Box fontSize={12} ml={1}>4.2</Box>
+                                        <Text fontSize={15} noOfLines={1} fontWeight="bold" mb={2}>{item?.descriptor?.name}</Text>
+                                        <HStack>
+
+                                            <Text noOfLines={1} fontSize={12} mb={2}> {t('PROVIDED_BY')}: {items?.message?.catalog?.providers[0]?.descriptor?.name}</Text>
                                         </HStack>
-                                    </HStack>
+                                        <HStack>
+                                            <Text fontSize={12} noOfLines={2} mb={2}>7 years in operation</Text>
+                                            <HStack display="flex" alignItems="center">
+                                                <Icon as={FaStar} color="#F4B73F" />
+                                                <Box fontSize={12} ml={1}>4.2</Box>
+                                            </HStack>
+                                        </HStack>
+                                    </Box>
 
                                 </Box>
                             </VStack>
@@ -140,7 +177,7 @@ const Search = () => {
                 </HStack>
             </VStack>
 
-            </Box>
+        </Box>
     );
 };
 

@@ -1,10 +1,25 @@
 import React from "react";
 import { Box, Flex, Image, Text, Icon, Link } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
-const CourseCard = ({ product }) => {
+
+const CourseCard = ({ item, items }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+console.log({items});
+  const goToDetailPage = (item) => {
+    navigate("/details", {
+        state: { item: item, items: items },
+    });
+}
+
   return (
     <Box
+    onClick={() => goToDetailPage(item)}
       display="flex"
       alignItems="center"
       padding="20px"
@@ -17,8 +32,8 @@ const CourseCard = ({ product }) => {
         flex="1"
         maxWidth="100px"
         height="100px"
-        src={product.descriptor.images[0]?.url || "path/to/dummy-image.jpg"}
-        alt={product.descriptor.name}
+        src={item.descriptor.images[0]?.url || "path/to/dummy-image.jpg"}
+        alt={item.descriptor.name}
         borderRadius="10px"
         marginRight="20px"
       />
@@ -30,14 +45,14 @@ const CourseCard = ({ product }) => {
           textAlign="left"
           marginBottom="10px"
         >
-          {product.descriptor.name}
+          {item.descriptor.name}
         </Text>
         <Text
           fontSize="12px"
           fontWeight="400"
           lineHeight="18px"
           marginBottom="10px"
-          dangerouslySetInnerHTML={{ __html: product.descriptor.short_desc }}
+          dangerouslySetInnerHTML={{ __html: item.descriptor.short_desc }}
         />
         <Text
           fontSize="12px"
@@ -45,7 +60,7 @@ const CourseCard = ({ product }) => {
           fontWeight="600"
           lineHeight="18px"
         >
-          Provided by: {product.descriptor.name}
+          {t('PROVIDED_BY')}: {item.descriptor.name}
         </Text>
         <Flex alignItems="center" justifyContent="space-between" marginBottom="10px">
           <Text
@@ -54,12 +69,12 @@ const CourseCard = ({ product }) => {
             lineHeight="18px"
             marginRight="10px"
           >
-            License: Proprietary | 7 years in operation
+            {t('LICENSE_PROPRIETARY')} | 7 years in operation
           </Text>
           <Flex alignItems="center">
             <Icon as={FaStar} color="yellow.400" />
             <Text fontSize="12px" fontWeight="400" lineHeight="18px" marginLeft="5px">
-              {product.rating || "4.5"}
+              {item.rating || "4.5"}
             </Text>
           </Flex>
         </Flex>

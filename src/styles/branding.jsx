@@ -32,7 +32,7 @@ export const header = {
   headerContent: {
     id: "logo",
     title1: "Dragon Foods",
-    title2: "A Climate Resilience Data Highways Platform",
+    title2: "Platform for Climate Resilient Data Highways",
     logoSrc: appIcon,
     appTitleColor: "#00B088",
     headerBgColor: "#EFEFEF"

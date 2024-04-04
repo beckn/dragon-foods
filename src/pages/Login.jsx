@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, Text, Image, VStack, useTheme } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Text, Image, VStack, useTheme, HStack } from '@chakra-ui/react';
 import { header, buttonCss } from "../styles/branding";
-import '../pages/Login.css';
 import { useTranslation } from "react-i18next";
 import poweredBy from '../assets/images/poweredby.png';
 import { useNavigate } from 'react-router-dom';
+import SubHeader from "../components/SubHeader";
 
 
 export default function Login() {
@@ -21,20 +21,18 @@ export default function Login() {
     };
 
     return (
-        <Box display="flex" justifyContent="center" height="100vh" mt={10}>
-            <Box textAlign="center" maxW="500px" width="100%" bg="white" p={8}>
+        <>
+        <HStack display="flex" justifyContent="center" height="100vh" mt={10}>
+            <VStack textAlign="center" maxW="600px" width="100%" bg="white">
                 <Image
-                    height={{ base: '80px', md: '80px' }}
-                    width={{ base: '80px', md: '80px' }}
-
+                    height='153px'
+                    width='333px'
                     src={header?.headerContent?.logoSrc}
                     alt="The house from the offer."
-                    ml={'40%'}
                 />
-
-                <Text fontSize={50} fontWeight={700} color={header?.headerContent?.appTitleColor}>{header?.headerContent?.title1}</Text>
-                <Text className='subline'>{header?.headerContent?.title2}</Text>
-            </Box>
+                {/* <Text fontSize={50} fontWeight={700} color={header?.headerContent?.appTitleColor}>{header?.headerContent?.title1}</Text> */}
+                <Text color='#564C4D' fontWeight={800} fontSize={17}>{header?.headerContent?.title2}</Text>
+            </VStack>
 
             <Box maxW="500px" width="100%" bg="white" p={8} >
                 {/* Application Title Section */}
@@ -107,6 +105,7 @@ export default function Login() {
                     </form>
                 </Box>
             </Box>
-        </Box>
+        </HStack>
+        </>
     );
 }

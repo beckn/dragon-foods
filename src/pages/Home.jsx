@@ -213,7 +213,7 @@ const Home = () => {
                 type="text"
                 placeholder={searchPlaceholder}
                 value={inputValue}
-                onChange={handleChange}
+                // onChange={handleChange}
               />
               <InputRightElement onClick={handleClear} cursor="pointer">
                 {inputValue ? (
@@ -247,10 +247,11 @@ const Home = () => {
             </Text>
             <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
               {items?.message?.catalog?.providers[0]?.items.map(
-                (product, index) => (
+                (item, index) => (
                   <CourseCard
                     key={index}
-                    product={product}
+                    item={item}
+                    items={items}
                     transactionId={transactionId}
                   />
                 )
