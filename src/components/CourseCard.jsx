@@ -1,71 +1,71 @@
-import React from 'react';
-import { useNavigate } from "react-router-dom";
-import { Card, CardHeader, CardBody, CardFooter, Heading, Text, Button, Box } from '@chakra-ui/react';
-import ImageLoader from "../components/getImagesData";
-import { useTranslation } from "react-i18next";
+import React from "react";
+import { Box, Flex, Image, Text, Icon, Link } from "@chakra-ui/react";
+import { FaStar } from "react-icons/fa";
 
-function CourseCard({ product, transactionId }) {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-
+const CourseCard = ({ product }) => {
   return (
-    <>
-     <Card
-  boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
-  display="flex"
-  flexDirection={['column', null, 'row']} // Stack items in column on small screens, and in a row on larger screens
-  alignItems="center" // Center items vertically
->
-  {/* Image on the left side */}
-  <ImageLoader
-    imageId={product?.image_url}
-    alt="Image not available"
-    p="10px"
-    flex="1" // Allow the image to grow to fill the available space
-  />
-
-  {/* Information about the product on the right side */}
-  <Box
-    flex="1" // Allow the content to grow to fill the available space
-    p={4} // Add padding to the right side
-  >
-    <CardHeader paddingBottom={2}>
-      {product?.title && <Heading size="md">{product.title}</Heading>}
-    </CardHeader>
-    <CardBody paddingTop={2} paddingBottom={1}>
-      {product?.provider_name && (
-        <Text mt={2}>
-          <strong>Published By:</strong> {product.provider_name}
+    <Box
+      display="flex"
+      alignItems="center"
+      padding="20px"
+      borderRadius="10px"
+      boxShadow="0px 20px 25px 0px rgba(0, 0, 0, 0.1), 0px 8px 10px 0px rgba(0, 0, 0, 0.1)"
+      backgroundColor="#ffffff"
+      marginBottom="20px"
+    >
+      <Image
+        flex="1"
+        maxWidth="100px"
+        height="100px"
+        src={product.descriptor.images[0]?.url || "path/to/dummy-image.jpg"}
+        alt={product.descriptor.name}
+        borderRadius="10px"
+        marginRight="20px"
+      />
+      <Flex flex="2" flexDirection="column">
+        <Text
+          fontSize="15px"
+          fontWeight="600"
+          lineHeight="22.5px"
+          textAlign="left"
+          marginBottom="10px"
+        >
+          {product.descriptor.name}
         </Text>
-      )}
-      {(product?.description || product?.shortDescription) && (
-        <Text mt={3}>
-          <strong>Description:</strong>{" "}
-          {product.shortDescription
-            ? product.shortDescription
-            : product.description
-            ? product.description.substring(0, 100) + "..."
-            : ""}
+        <Text
+          fontSize="12px"
+          fontWeight="400"
+          lineHeight="18px"
+          marginBottom="10px"
+          dangerouslySetInnerHTML={{ __html: product.descriptor.short_desc }}
+        />
+        <Text
+          fontSize="12px"
+          marginBottom="10px"
+          fontWeight="600"
+          lineHeight="18px"
+        >
+          Provided by: {product.descriptor.name}
         </Text>
-      )}
-    </CardBody>
-    <CardFooter>
-      <Button
-        className="custom-button"
-        onClick={() => {
-          navigate("/details", {
-            state: { product: product, transactionId: transactionId },
-          });
-        }}
-      >
-        {t('VIEW_DETAILS')}
-      </Button>
-    </CardFooter>
-  </Box>
-</Card>
+        <Flex alignItems="center" justifyContent="space-between" marginBottom="10px">
+          <Text
+            fontSize="12px"
+            fontWeight="400"
+            lineHeight="18px"
+            marginRight="10px"
+          >
+            License: Proprietary | 7 years in operation
+          </Text>
+          <Flex alignItems="center">
+            <Icon as={FaStar} color="yellow.400" />
+            <Text fontSize="12px" fontWeight="400" lineHeight="18px" marginLeft="5px">
+              {product.rating || "4.5"}
+            </Text>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
 
-    </>
-  )
-}
-
-export default CourseCard
+export default CourseCard;
