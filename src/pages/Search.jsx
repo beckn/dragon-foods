@@ -6,14 +6,14 @@ import onSearch from '../assets/apiJson/on_search.json';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import SubHeader from '../components/SubHeader';
-import mapIcon from '../assets/images/map.svg'
+import mapIcon from '../assets/images/map.svg';
 
 const Search = () => {
     const { t } = useTranslation();
     const [searchTxt, setSearchTxt] = useState('');
     const [location, setLocation] = useState('');
     const [year, setYear] = useState('2 years');
-    const [items, setItems] = useState(onSearch)
+    const [items, setItems] = useState(onSearch);
     const navigate = useNavigate();
 
     const cityLocations = [
@@ -30,24 +30,20 @@ const Search = () => {
         "Zakiganj",
         "Dakshinsurma",
         "Osmaninagar"
-    ]
-
-
-    // useEffect(() => {
-    //   }, []);
+    ];
 
     const searchData = async () => {
         console.log(searchTxt + ' - ' + year + ' - ' + location);
         navigate("/home", {
             state: { searchTxt: searchTxt, year: year, locationitems: location },
         });
-    }
+    };
 
     const goTodetailPage = (item, items) => {
         navigate("/details", {
             state: { item: item, items: items },
         });
-    }
+    };
     
     return (
         <Box>
@@ -75,7 +71,7 @@ const Search = () => {
                 />
                 <Select
                     boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
-                    width='36rem'
+                    width='36.5rem'
                     height='56px'
                     id="location"
                     mt={2}
@@ -87,7 +83,6 @@ const Search = () => {
                     onChange={(e) => setLocation(e.target.value)}
                 >
                     {/* Placeholder option */}
-
                     <option value="" disabled hidden>{t('ENTER_LOCATION')}</option>
                     {cityLocations.map(city => (
                         <option key={city} value={city}>
@@ -104,7 +99,7 @@ const Search = () => {
                     mt={2}
                     autoComplete="year"
                     value={year}
-                    p={4}
+                    p={3}
                     fontSize={15}
                     onChange={(e) => setYear(e.target.value)}
                 >
@@ -125,8 +120,8 @@ const Search = () => {
 
                 <HStack>
                     {items?.message?.catalog?.providers[0]?.items.map((item, index) => (
-
-                        <Card background={'#F6F6F6'}
+                        <Card 
+                            background={'#F6F6F6'}
                             display="flex"
                             width={180}
                             height={234}
@@ -142,23 +137,20 @@ const Search = () => {
                             mb={6}
                             onClick={() => goTodetailPage(item, items)}
                         >
-
                             <VStack flex={1}>
                                 <Box height='132px' >
                                     <Image
-                                    mt={5}
+                                        mt={5}
                                         height='100px'
                                         width='100px'
                                         src={item?.descriptor?.images[0].url}
                                         alt="The house from the offer."
                                     />
                                 </Box>
-                                <Box bg={'#FFF'}  borderRadius="lg"  height='132px'>
+                                <Box bg={'#FFF'} borderRadius="lg" height='132px'>
                                     <Box p={2}>
-
                                         <Text fontSize={15} noOfLines={1} fontWeight="bold" mb={2}>{item?.descriptor?.name}</Text>
                                         <HStack>
-
                                             <Text noOfLines={1} fontSize={12} mb={2}> {t('PROVIDED_BY')}: {items?.message?.catalog?.providers[0]?.descriptor?.name}</Text>
                                         </HStack>
                                         <HStack>
@@ -169,14 +161,12 @@ const Search = () => {
                                             </HStack>
                                         </HStack>
                                     </Box>
-
                                 </Box>
                             </VStack>
-                        </Card>))}
-
+                        </Card>
+                    ))}
                 </HStack>
             </VStack>
-
         </Box>
     );
 };
