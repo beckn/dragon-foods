@@ -46,11 +46,10 @@ const SubDetail = (item, items) => {
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
                 <Box>
                     <Text fontSize={12} fontWeight={600}>{t('ABOUT')} {state?.item?.descriptor?.name}</Text>
-                    <Text fontSize={12} mt={1} >{state?.item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')}</Text>
+                    <Text fontSize={12} mt={1}>{state?.item?.descriptor?.short_desc}</Text>
                 </Box>
                 <Box mt={5}>
-                    <Text fontSize={12} fontWeight={600}> {state?.item?.tags[0]?.list[0]?.value} {t('LICENSE_PROPRIETARY')}</Text>
-                    <Text fontSize={12} mt={1}>{state?.item?.descriptor?.short_desc}</Text>
+                    <Text fontSize={12}> {t('LICENSE')} {state?.item?.tags[0]?.list[0]?.value} | {state?.item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')} </Text>
                 </Box>
             </Card>
 

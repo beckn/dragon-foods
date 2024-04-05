@@ -26,7 +26,7 @@
     "STARS":"stars",
 
     "ABOUT": "About",
-    "LICENSE_PROPRIETARY":": Proprietary",
+    "LICENSE":"License: ", 
     "ADD_TO_CART":"Add to Cart",
     "PRICE_WILL_VARY":"** Price will vary based on the options selected",
 

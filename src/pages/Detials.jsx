@@ -161,7 +161,7 @@ const Details = () => {
                 border="1px solid rgba(191, 191, 191, 1)" width="150px" height={150}>
                 <Image
                   p={4}
-                  src={state?.item?.descriptor?.images[0].url} width={150}
+                  src={state?.item?.descriptor?.images[0].url} width={200}
                   height={150}
                 /></Box>
               <Box m={3}>

@@ -145,7 +145,7 @@ const Search = () => {
                                     <Image
                                         mt={5}
                                         height='100px'
-                                        width='100px'
+                                        width='130px'
                                         src={item?.descriptor?.images[0].url}
                                         alt="The house from the offer."
                                     />

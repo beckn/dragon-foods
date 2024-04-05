@@ -68,7 +68,7 @@ const CourseCard = ({ item }) => {
             lineHeight="18px"
             marginRight="10px"
           >
-           {item?.tags[0]?.list[0]?.value} {t('LICENSE_PROPRIETARY')} | {item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')}
+           {t('LICENSE')}  {item?.tags[0]?.list[0]?.value} | {item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')}
           </Text>
           <Flex alignItems="center">
             <Icon as={FaStar} color="yellow.400" />
