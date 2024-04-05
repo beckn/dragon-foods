@@ -163,6 +163,7 @@ const Details = () => {
                   p={4}
                   src={state?.item?.descriptor?.images[0].url} width={200}
                   height={150}
+                  objectFit="contain" 
                 /></Box>
               <Box m={3}>
                 <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.items[0]?.descriptor?.name}</Text>

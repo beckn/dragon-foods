@@ -5,20 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
-
 const CourseCard = ({ item }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+
   const goToDetailPage = (item) => {
     navigate("/details", {
         state: { item: item },
     });
-}
+  }
 
   return (
     <Box
-    onClick={() => goToDetailPage(item)}
+      onClick={() => goToDetailPage(item)}
       display="flex"
       alignItems="center"
       padding="20px"
@@ -35,6 +35,7 @@ const CourseCard = ({ item }) => {
         alt={item?.items[0]?.descriptor.name}
         borderRadius="10px"
         marginRight="20px"
+        objectFit="contain" 
       />
       <Flex flex="2" flexDirection="column">
         <Text

@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
 import SuccessPayment from './components/SuccessPayment';
 import { Box } from '@chakra-ui/react';
+import OrderHistory from './pages/OrderHistory';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/success" element={<SuccessPayment />} />
           <Route path="/confirm/:itemId" element={<MediaPage />} />
+          <Route path="/orderhistory" element={<OrderHistory/>}/>
         </Routes>
       </Router>
     </>
