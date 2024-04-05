@@ -29,7 +29,6 @@ function App() {
           <Route path="/success" element={<SuccessPayment />} />
           <Route path="/confirm/:itemId" element={<MediaPage />} />
         </Routes>
-        {appConfig?.isFooter && <Box mt={100}> <Footer /> </Box>}
       </Router>
     </>
   )
