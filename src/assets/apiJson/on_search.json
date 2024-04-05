@@ -111,7 +111,7 @@
                     "url" : "https://www.analytics.sky/flood-prediction-data-23-24-sample/downloadsample",
                     "content_type" : "text/html"
                   },
-                  "name": "Flood Prediction Data - Y23-244",
+                  "name": "Flood Prediction Data - Y23-24",
                   "short_desc": "Flood Prediction Data - Y23-24 provides forecasts and analysis for potential flooding events anticipated in the years 2023 to 2024.",
                   "long_desc": "<div><p><strong>Flood Prediction Data - Y23-24</strong> offers comprehensive forecasts, analyses, and insights regarding potential flooding occurrences expected between the years 2023 and 2024. This dataset integrates meteorological, hydrological, and geographical parameters to deliver detailed predictions encompassing flood risk levels, onset times, durations, extents, and potential impact areas. Leveraging advanced modeling techniques and historical data analysis, this dataset aims to provide stakeholders with actionable information to enhance preparedness, response, and resilience strategies against flooding events. By facilitating proactive measures and adaptive planning, <strong>Flood Prediction Data - Y23-24</strong> contributes to minimizing the adverse consequences of floods on communities, infrastructure, and the environment, fostering a safer and more sustainable future.</p></div>"
                 },
@@ -220,7 +220,7 @@
                     "url" : "https://www.analytics.sky/flood-prediction-data-20-24-sample/downloadsample",
                     "content_type" : "text/html"
                   },
-                  "name": "LFlood Prediction Data - Y20-24",
+                  "name": "Flood Prediction Data - Y20-24",
                   "short_desc": "Flood Prediction Data - Y20-24 provides forecasts and analysis for potential flooding events anticipated in the years 2020 to 2024.",
                   "long_desc": "<div><p><strong>Flood Prediction Data - Y20-24</strong> offers comprehensive forecasts, analyses, and insights regarding potential flooding occurrences expected between the years 2020 and 2024. This dataset integrates meteorological, hydrological, and geographical parameters to deliver detailed predictions encompassing flood risk levels, onset times, durations, extents, and potential impact areas. Leveraging advanced modeling techniques and historical data analysis, this dataset aims to provide stakeholders with actionable information to enhance preparedness, response, and resilience strategies against flooding events. By facilitating proactive measures and adaptive planning, <strong>Flood Prediction Data - Y23-24</strong> contributes to minimizing the adverse consequences of floods on communities, infrastructure, and the environment, fostering a safer and more sustainable future.</p></div>"
                 },
@@ -329,7 +329,7 @@
                     "url" : "https://www.analytics.sky/flood-prediction-data-23-24-sample/downloadsample",
                     "content_type" : "text/html"
                   },
-                  "name": "TFlood Prediction Data - Y23-24",
+                  "name": "Flood Prediction Data - Y23-24",
                   "short_desc": "Flood Prediction Data - Y23-24 provides forecasts and analysis for potential flooding events anticipated in the years 2023 to 2024.",
                   "long_desc": "<div><p><strong>Flood Prediction Data - Y23-24</strong> offers comprehensive forecasts, analyses, and insights regarding potential flooding occurrences expected between the years 2023 and 2024. This dataset integrates meteorological, hydrological, and geographical parameters to deliver detailed predictions encompassing flood risk levels, onset times, durations, extents, and potential impact areas. Leveraging advanced modeling techniques and historical data analysis, this dataset aims to provide stakeholders with actionable information to enhance preparedness, response, and resilience strategies against flooding events. By facilitating proactive measures and adaptive planning, <strong>Flood Prediction Data - Y23-24</strong> contributes to minimizing the adverse consequences of floods on communities, infrastructure, and the environment, fostering a safer and more sustainable future.</p></div>"
                 },
