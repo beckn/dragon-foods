@@ -161,12 +161,12 @@ const Details = () => {
                 border="1px solid rgba(191, 191, 191, 1)" width="150px" height={150}>
                 <Image
                   p={4}
-                  src={state?.item?.descriptor?.images[0].url} width={150}
+                  src={state?.item?.descriptor?.images[0].url} width={200}
                   height={150}
                   objectFit="contain" 
                 /></Box>
               <Box m={3}>
-                <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.descriptor?.name}</Text>
+                <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.items[0]?.descriptor?.name}</Text>
                 <HStack mb={2}>
                   <Text fontSize={15} fontWeight={600}>{t('PROVIDED_BY')} </Text>
                   <Text fontSize={15}>{state?.item?.descriptor?.name} </Text>

@@ -31,7 +31,6 @@ function App() {
           <Route path="/confirm/:itemId" element={<MediaPage />} />
           <Route path="/orderhistory" element={<OrderHistory/>}/>
         </Routes>
-        {appConfig?.isFooter && <Box mt={100}> <Footer /> </Box>}
       </Router>
     </>
   )
