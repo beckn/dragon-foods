@@ -213,7 +213,6 @@ const Home = () => {
                 type="text"
                 placeholder={searchPlaceholder}
                 value={inputValue}
-                // onChange={handleChange}
               />
               <InputRightElement onClick={handleClear} cursor="pointer">
                 {inputValue ? (
@@ -242,9 +241,7 @@ const Home = () => {
           />
         ) : (
           <>
-            <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
-              ** Price will vary based on the options selected
-            </Text>
+            <Text mt={4} fontSize={12} fontWeight={400} >{t('** Price will vary based on the options selected')}</Text>
             <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
               {items?.message?.catalog?.providers[0]?.items.map(
                 (item, index) => (
@@ -260,7 +257,7 @@ const Home = () => {
 
             <Pagination
               currentPage={currentPage}
-              totalPages={Math.ceil(items.length / itemsPerPage)}
+              totalPages={Math.ceil(items?.message?.catalog?.providers[0]?.items.length / itemsPerPage)}
               handlePageChange={handlePageChange}
             />
           </>
