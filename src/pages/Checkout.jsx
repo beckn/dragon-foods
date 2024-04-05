@@ -9,6 +9,7 @@ import dataList from '../assets/apiJson/checkoutForm.json';
 import { header, buttonCss } from "../styles/branding";
 import { useNavigate } from 'react-router-dom';
 import  SubHeader from '../components/SubHeader';
+import  Footer from '../components/Footer';
 
 const Checkout = (item) => {
     const { t } = useTranslation();
@@ -84,6 +85,8 @@ const Checkout = (item) => {
                         {t('PROCEED_TO_PAYMENT')}
                     </Button>
         </Box>
+        <Box mt={100}> <Footer /> </Box>
+
         </>
     );
 };

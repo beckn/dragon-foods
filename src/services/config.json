@@ -9,7 +9,7 @@
     "footerText": "Developed with ❤️ by Tekdi Technologies ",
     "headerColor": "white",
     "headerFontSize": "16",
-    "logo": "../assets/school_logo.png",
+    "logo": "../assets/images/logo.png",
     "isAdvFilter": true,
     "isSearch": true,
     

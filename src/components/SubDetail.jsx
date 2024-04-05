@@ -14,45 +14,64 @@ const SubDetail = (item, items) => {
     const navigate = useNavigate();
     const [selectedOptions, setSelectedOptions] = useState([]);
 
-    const handleCheckboxChange = (option) => {
-        setSelectedOptions((prevSelectedOptions) =>
-            prevSelectedOptions.includes(option)
-                ? prevSelectedOptions.filter((item) => item !== option)
-                : [...prevSelectedOptions, option]
-        );
+    const [selectedTags, setSelectedTags] = useState([]);
 
-        console.log(selectedOptions);
+    const handleCheckboxChange = (tagName, option) => {
+        const tagIndex = selectedTags.findIndex(tag => tag.descriptor.name === tagName);
+        if (tagIndex !== -1) {
+            const newTags = [...selectedTags];
+            const optionIndex = newTags[tagIndex].list.findIndex(item => item.value === option);
+            if (optionIndex !== -1) {
+                newTags[tagIndex].list.splice(optionIndex, 1);
+                if (newTags[tagIndex].list.length === 0) {
+                    newTags.splice(tagIndex, 1);
+                }
+            } else {
+                newTags[tagIndex].list.push({ value: option });
+            }
+            setSelectedTags(newTags);
+        } else {
+            setSelectedTags([...selectedTags, {
+                descriptor: {
+                    name: tagName
+                },
+                list: [{ value: option }]
+            }]);
+        }
+
+        console.log(localStorage.setItem('selectedData', JSON.stringify(selectedTags)));
     };
-
     return (
         <>
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
                 <Box>
-                    <Text fontSize={12} fontWeight={600}>{t('ABOUT')} {state?.items?.message?.catalog?.providers[0]?.descriptor?.name}</Text>
-                    <Text fontSize={12} mt={1} >7 years in operation</Text>
+                    <Text fontSize={12} fontWeight={600}>{t('ABOUT')} {state?.item?.descriptor?.name}</Text>
+                    <Text fontSize={12} mt={1} >{state?.item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')}</Text>
                 </Box>
                 <Box mt={5}>
-                    <Text fontSize={12} fontWeight={600}>{t('LICENSE_PROPRIETARY')}</Text>
+                    <Text fontSize={12} fontWeight={600}> {state?.item?.tags[0]?.list[0]?.value} {t('LICENSE_PROPRIETARY')}</Text>
                     <Text fontSize={12} mt={1}>{state?.item?.descriptor?.short_desc}</Text>
                 </Box>
             </Card>
 
-            <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
-                {dataList?.list?.map((item, index) => (
-                    <Box key={index} mb={8} >
-                        <FormLabel fontSize={12} fontWeight={600}>{item.title}</FormLabel>
-                        {item.options.map((option, i) => (
-                            <Checkbox fontSize={12} ml={5}
-                                key={i}
-                                isChecked={selectedOptions.includes(option)}
-                                onChange={() => handleCheckboxChange(option)}
-                            >
-                                <Text fontSize={12} mt={1}> {option}</Text>
-                            </Checkbox>
-                        ))}
-                    </Box>
-                ))}
-            </Card>
+           
+
+<Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
+            {state?.item?.items[0]?.tags?.map((tag, index) => (
+                <Box key={index} mb={8}>
+                    <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
+                    {tag.list.map((item, i) => (
+                        <Checkbox fontSize={12} ml={5}
+                            key={i}
+                            isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
+                            onChange={() => handleCheckboxChange(tag.descriptor.name, item.value)}
+                        >
+                            <Text fontSize={12} mt={1}> {item.value}</Text>
+                        </Checkbox>
+                    ))}
+                </Box>
+            ))}
+        </Card>
 
             
         </>

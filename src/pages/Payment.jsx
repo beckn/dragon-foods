@@ -14,6 +14,7 @@ import netBank from '../assets/images/netBank.png';
 import paypal from '../assets/images/paypal.png';
 import ModalPleaseWait from '../components/ModalPleaseWait';
 import  SubHeader from '../components/SubHeader';
+import  Footer from '../components/Footer';
 
 
 const Payment = (item) => {
@@ -166,6 +167,8 @@ const Payment = (item) => {
         />
       )}
     </Box>
+    <Box mt={100}> <Footer /> </Box>
+
     </>
   );
 };

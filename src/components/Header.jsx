@@ -5,7 +5,7 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
- import logo from "../assets/school_logo.png";
+ import logo from "../assets/images/logo.png";
 import config from '../services/config.json';
 import { useTranslation } from "react-i18next";
 import { header, buttonCss } from "../styles/branding";

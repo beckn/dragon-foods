@@ -15,7 +15,8 @@ import { FaStar } from 'react-icons/fa';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import SubDetail from '../components/SubDetail';
 import { header, buttonCss } from "../styles/branding";
-import  SubHeader from '../components/SubHeader';
+import SubHeader from '../components/SubHeader';
+import Footer from '../components/Footer';
 
 
 const Details = () => {
@@ -41,7 +42,7 @@ const Details = () => {
   useEffect(() => {
     if (state && state.item) {
       // fetchSelectedCourseData();
-      const rating = state?.items?.message?.catalog?.providers[0]?.rating;
+      const rating = state?.item?.rating;
       setFilledStars(Math.floor(rating)); // Number of filled stars
       setHasHalfStar(rating - filledStars >= 0.5); // Check if there is a half star
     }
@@ -134,15 +135,15 @@ const Details = () => {
   };
 
   const Submit = async () => {
-  
+
     navigate("/checkout", {
-      state: { item: state?.item},
-    });   
+      state: { item: state?.item },
+    });
   }
 
   return (
     <>
-    <SubHeader title={state?.item?.descriptor?.name} cartItemCount={2} />
+      <SubHeader title={state?.item?.descriptor?.name} cartItemCount={2} />
 
       {isLoading ? (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -152,7 +153,7 @@ const Details = () => {
         </div>
       ) : (
         <>
-         
+
           <Card mx={'100px'} mt={30} p={5}>
             <HStack>
               <Box background="rgba(255, 255, 255, 1)" alignItems="stretch"
@@ -166,8 +167,8 @@ const Details = () => {
               <Box m={3}>
                 <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.descriptor?.name}</Text>
                 <HStack mb={2}>
-                  <Text fontSize={15} fontWeight={600}>Provided by </Text>
-                  <Text fontSize={15}>{state?.items?.message?.catalog?.providers[0]?.descriptor?.name} </Text>
+                  <Text fontSize={15} fontWeight={600}>{t('PROVIDED_BY')} </Text>
+                  <Text fontSize={15}>{state?.item?.descriptor?.name} </Text>
                 </HStack>
                 <HStack>
                   {/* <Icon as={FaStar} color="#F4B73F" />
@@ -180,7 +181,7 @@ const Details = () => {
                     {[...Array(5 - filledStars - (hasHalfStar ? 1 : 0))].map((_, index) => (
                       <Icon key={index + filledStars + 1} as={BsStarFill} ml={1} color="gray.300" />
                     ))}
-                    <Text mt={1} fontSize={15}>{state?.items?.message?.catalog?.providers[0]?.rating} {t('STARS')}</Text>
+                    <Text mt={1} fontSize={15}>{state?.item?.rating} {t('STARS')}</Text>
                   </HStack>
                 </HStack>
 
@@ -191,18 +192,20 @@ const Details = () => {
             </Box>
 
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
-                <HStack>
-                    <Button type="submit" onClick={Submit} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
-                        {t('ADD_TO_CART')}
-                    </Button>
-                    <Text fontSize={12} ml={4}>{t('PRICE_WILL_VARY')}</Text>
-                </HStack>
+              <HStack>
+                <Button type="submit" onClick={Submit} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor}>
+                  {t('ADD_TO_CART')}
+                </Button>
+                <Text fontSize={12} ml={4}>{t('PRICE_WILL_VARY')}</Text>
+              </HStack>
             </Card>
 
           </Card>
 
         </>
       )}
+      <Box mt={100}> <Footer /> </Box>
+
     </>
   );
 };

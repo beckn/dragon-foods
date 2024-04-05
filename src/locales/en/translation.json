@@ -26,7 +26,7 @@
     "STARS":"stars",
 
     "ABOUT": "About",
-    "LICENSE_PROPRIETARY":"License : Proprietary",
+    "LICENSE_PROPRIETARY":": Proprietary",
     "ADD_TO_CART":"Add to Cart",
     "PRICE_WILL_VARY":"** Price will vary based on the options selected",
 
@@ -55,5 +55,6 @@
     "SENT_YOUR_DATA_REPORT":"We have sent your data report on your requested email ID:",
     "GO_BACK_HOME":"Go Back Home",
     "ORDER_HISTORY":"Order History",
-    "VIEW_BALANCE":"View Balance"
+    "VIEW_BALANCE":"View Balance",
+    "YEARS_IN_OPERATION":" years in operation"
 }

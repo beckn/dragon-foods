@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import Loader from '../components/Loader';
+import  Footer from '../components/Footer';
 
 const env = import.meta.env;
 
@@ -146,6 +147,7 @@ const MediaPage = () => {
     console.log(`${state.product?.title} transaction id Confirm ${transactionId}`);
     console.log(`${state.product?.title} messageId Confirm ${messageId}`);
     return (
+        <>
         <Box p={4}>
             {isLoading ? (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -201,6 +203,9 @@ const MediaPage = () => {
                 </>
             )}
         </Box>
+        <Box mt={100}> <Footer /> </Box>
+
+        </>
     )
 }
 

@@ -25,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { MdFilterList } from "react-icons/md";
 import onSearch from "../assets/apiJson/on_search.json";
 import SubHeader from "../components/SubHeader";
+import  Footer from '../components/Footer';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -213,6 +214,7 @@ const Home = () => {
                 type="text"
                 placeholder={searchPlaceholder}
                 value={inputValue}
+                // onChange={handleChange}
               />
               <InputRightElement onClick={handleClear} cursor="pointer">
                 {inputValue ? (
@@ -241,14 +243,15 @@ const Home = () => {
           />
         ) : (
           <>
-            <Text mt={4} fontSize={12} fontWeight={400} >{t('** Price will vary based on the options selected')}</Text>
+            <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
+              ** Price will vary based on the options selected
+            </Text>
             <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
-              {items?.message?.catalog?.providers[0]?.items.map(
+              {items?.message?.catalog?.providers.map(
                 (item, index) => (
                   <CourseCard
                     key={index}
                     item={item}
-                    items={items}
                     transactionId={transactionId}
                   />
                 )
@@ -257,12 +260,14 @@ const Home = () => {
 
             <Pagination
               currentPage={currentPage}
-              totalPages={Math.ceil(items?.message?.catalog?.providers[0]?.items.length / itemsPerPage)}
+              totalPages={Math.ceil(items?.message?.catalog?.providers.length / itemsPerPage)}
               handlePageChange={handlePageChange}
             />
           </>
         )}
       </Box>
+      <Box mt={100}> <Footer /> </Box>
+
     </>
   );
 };

@@ -1,24 +1,24 @@
 import React from "react";
 import { Box, Flex, Image, Text, Icon, Link } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
-const CourseCard = ({ item, items }) => {
+
+const CourseCard = ({ item }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log({ items });
   const goToDetailPage = (item) => {
     navigate("/details", {
-      state: { item: item, items: items },
+        state: { item: item },
     });
-  };
+}
 
   return (
     <Box
-      onClick={() => goToDetailPage(item)}
+    onClick={() => goToDetailPage(item)}
       display="flex"
       alignItems="center"
       padding="20px"
@@ -59,29 +59,20 @@ const CourseCard = ({ item, items }) => {
           fontWeight="600"
           lineHeight="18px"
         >
-          {t("PROVIDED_BY")}: {item.descriptor.name}
+          {t('PROVIDED_BY')}: {item.descriptor.name}
         </Text>
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          marginBottom="10px"
-        >
+        <Flex alignItems="center" justifyContent="space-between" marginBottom="10px">
           <Text
             fontSize="12px"
             fontWeight="400"
             lineHeight="18px"
             marginRight="10px"
           >
-            {t("LICENSE_PROPRIETARY")} | 7 years in operation
+           {item?.tags[0]?.list[0]?.value} {t('LICENSE_PROPRIETARY')} | {item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')}
           </Text>
           <Flex alignItems="center">
             <Icon as={FaStar} color="yellow.400" />
-            <Text
-              fontSize="12px"
-              fontWeight="400"
-              lineHeight="18px"
-              marginLeft="5px"
-            >
+            <Text fontSize="12px" fontWeight="400" lineHeight="18px" marginLeft="5px">
               {item.rating || "4.5"}
             </Text>
           </Flex>

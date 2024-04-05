@@ -7,6 +7,7 @@ import dataList from '../assets/apiJson/checkoutForm.json';
 import { header, buttonCss } from "../styles/branding";
 import { useNavigate } from 'react-router-dom';
 import successImg from '../assets/images/SuccessMessage.png'
+import  Footer from '../components/Footer';
 
 const SuccessPayment = (item, items) => {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ const SuccessPayment = (item, items) => {
 }
 
   return (
+    <>
       <VStack mt={15} mb={20} justifyContent={'center'} alignContent={'center'} alignItems={'center'}>
         <Image
           height={{ base: '170px', md: '170px' }}
@@ -36,6 +38,9 @@ const SuccessPayment = (item, items) => {
         {t('GO_BACK_HOME')}
       </Button>
       </VStack>
+      <Box mt={100}> <Footer /> </Box>
+
+      </>
   );
 };
 

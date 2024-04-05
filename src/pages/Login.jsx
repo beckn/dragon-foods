@@ -90,10 +90,10 @@ export default function Login() {
                                 {t('SIGN_IN')}
                             </Button>
 
-                            <Box display={'flex'}>
+                            {/* <Box display={'flex'}>
                                 <Text>{t('DONT_HAVE_ACCOUNT')}</Text>
                                 <Text color={buttonCss?.primaryBtnColor} ml={1}> {t('SIGN_UP')}</Text>
-                            </Box>
+                            </Box> */}
                             <Box ml={60} my={4}>
                                 <Image
                                     src={poweredBy}
@@ -106,6 +106,7 @@ export default function Login() {
                 </Box>
             </Box>
         </HStack>
+        
         </>
     );
 }

@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react';
 import SearchResultCard from '../components/SearchResultCard';
 import Slider from '../components/Slider';
 import { useTranslation } from "react-i18next";
+import  Footer from '../components/Footer';
 
 function SearchScreen({ searchText }) {
   const { t } = useTranslation();
@@ -39,6 +40,8 @@ function SearchScreen({ searchText }) {
           )}
         </Box>
       </Box>
+      <Box mt={100}> <Footer /> </Box>
+
     </Box>
   );
 }

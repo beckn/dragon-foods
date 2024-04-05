@@ -7,13 +7,15 @@ import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import SubHeader from '../components/SubHeader';
 import mapIcon from '../assets/images/map.svg';
+import Footer from '../components/Footer';
+
 
 const Search = () => {
     const { t } = useTranslation();
     const [searchTxt, setSearchTxt] = useState('');
     const [location, setLocation] = useState('');
     const [year, setYear] = useState('2 years');
-    const [items, setItems] = useState(onSearch);
+    const [items, setItems] = useState(onSearch)
     const navigate = useNavigate();
 
     const cityLocations = [
@@ -37,14 +39,14 @@ const Search = () => {
         navigate("/home", {
             state: { searchTxt: searchTxt, year: year, locationitems: location },
         });
-    };
+    }
 
-    const goTodetailPage = (item, items) => {
+    const goTodetailPage = (item) => {
         navigate("/details", {
-            state: { item: item, items: items },
+            state: { item: item },
         });
-    };
-    
+    }
+
     return (
         <Box>
             <SubHeader cartItemCount={2} back={false} />
@@ -119,9 +121,9 @@ const Search = () => {
                 </Text>
 
                 <HStack>
-                    {items?.message?.catalog?.providers[0]?.items.map((item, index) => (
-                        <Card 
-                            background={'#F6F6F6'}
+                    {items?.message?.catalog?.providers.map((item, index) => (
+
+                        <Card background={'#F6F6F6'}
                             display="flex"
                             width={180}
                             height={234}
@@ -135,39 +137,45 @@ const Search = () => {
                             cursor="pointer"
                             boxShadow="7px 12px 0px rgba(0, 0, 0, 0.1)"
                             mb={6}
-                            onClick={() => goTodetailPage(item, items)}
+                            onClick={() => goTodetailPage(item)}
                         >
+
                             <VStack flex={1}>
                                 <Box height='132px' >
                                     <Image
                                         mt={5}
                                         height='100px'
                                         width='100px'
-                                        src={item?.descriptor?.images[0].url}
+                                        src={item?.items[0]?.descriptor?.images[0].url}
                                         alt="The house from the offer."
                                     />
                                 </Box>
                                 <Box bg={'#FFF'} borderRadius="lg" height='132px'>
                                     <Box p={2}>
+
                                         <Text fontSize={15} noOfLines={1} fontWeight="bold" mb={2}>{item?.descriptor?.name}</Text>
                                         <HStack>
-                                            <Text noOfLines={1} fontSize={12} mb={2}> {t('PROVIDED_BY')}: {items?.message?.catalog?.providers[0]?.descriptor?.name}</Text>
+
+                                            <Text noOfLines={1} fontSize={12} mb={2}> {t('PROVIDED_BY')}: {item?.descriptor?.name}</Text>
                                         </HStack>
                                         <HStack>
-                                            <Text fontSize={12} noOfLines={2} mb={2}>7 years in operation</Text>
+                                            <Text fontSize={12} noOfLines={1} mt={2} mb={2}> {item?.tags[0]?.list[1]?.value} {t('YEARS_IN_OPERATION')}</Text>
                                             <HStack display="flex" alignItems="center">
                                                 <Icon as={FaStar} color="#F4B73F" />
                                                 <Box fontSize={12} ml={1}>4.2</Box>
                                             </HStack>
                                         </HStack>
                                     </Box>
+
                                 </Box>
                             </VStack>
-                        </Card>
-                    ))}
+                        </Card>))}
+
                 </HStack>
             </VStack>
+            <Box mt={100}> <Footer /> </Box>
         </Box>
+
     );
 };
 
