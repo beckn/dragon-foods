@@ -12,7 +12,7 @@ import  SubHeader from '../components/SubHeader';
 import  Footer from '../components/Footer';
 import onSelect from '../assets/apiJson/on_select.json';
 
-const Checkout = (item) => {
+const Checkout = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const state = location?.state;
