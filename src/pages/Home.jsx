@@ -216,7 +216,7 @@ const Home = () => {
     if (selectedFilter && selectedFilter !== "All") {
       setSearchPlaceholder(`You are Searching in ${selectedFilter}`);
     } else {
-      setSearchPlaceholder(t("SEARCH"));
+      setSearchPlaceholder('Flood prediction data in Sylhet');
     }
   }, [selectedFilter]);
 
@@ -261,9 +261,9 @@ const Home = () => {
           />
         ) : (
           <>
-            <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
+            {/* <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
               {t('PRICE_WILL_VARY')}
-            </Text>
+            </Text> */}
             <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
               {items?.message?.catalog?.providers.map(
                 (item, index) => (
