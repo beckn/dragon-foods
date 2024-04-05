@@ -14,7 +14,7 @@ const Search = () => {
     const { t } = useTranslation();
     const [searchTxt, setSearchTxt] = useState('');
     const [location, setLocation] = useState('');
-    const [year, setYear] = useState('2 years');
+    const [year, setYear] = useState('1 years');
     const [items, setItems] = useState(onSearch)
     const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Search = () => {
     const searchData = async () => {
         console.log(searchTxt + ' - ' + year + ' - ' + location);
         navigate("/home", {
-            state: { searchTxt: searchTxt, year: year, locationitems: location },
+            state: { searchTxt: searchTxt, year: year, location: location },
         });
     }
 

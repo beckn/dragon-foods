@@ -40,6 +40,8 @@
     "PROCEED_TO_PAYMENT":"Proceed To Payment",
     "PROVIDED_BY": "Provided by ",
     "CHECKOUT": "Checkout",
+    "PROCEED":"Proceed",
+
 
     "SAVE_CARDS":"Saved Cards",
     "OTHER_PAYMENT_METHOD":"Other Payment Methods",
@@ -52,7 +54,7 @@
     "WE_PROCESS_YOUR_PAYMENT":"While we process your payment",
 
     "ORDER_CONFIRMED":"Order confirmed!",
-    "SENT_YOUR_DATA_REPORT":"We have sent your data report on your requested email ID:",
+    "SENT_YOUR_DATA_REPORT":"The dataset has been sent to the requested destination email ID:",
     "GO_BACK_HOME":"Go Back Home",
     "ORDER_HISTORY":"Order History",
     "VIEW_BALANCE":"View Balance",

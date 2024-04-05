@@ -17,6 +17,7 @@ import SubDetail from '../components/SubDetail';
 import { header, buttonCss } from "../styles/branding";
 import SubHeader from '../components/SubHeader';
 import Footer from '../components/Footer';
+import ModalPleaseWait from '../components/ModalPleaseWait';
 
 
 const Details = () => {
@@ -34,6 +35,7 @@ const Details = () => {
   const [transactionId, setTransactionId] = useState(state?.transactionId || uuidv4());
   const [filledStars, setFilledStars] = useState('');
   const [hasHalfStar, setHasHalfStar] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
 
   const messageId = uuidv4();
@@ -134,11 +136,25 @@ const Details = () => {
     navigate('/');
   };
 
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+  };
+
+
   const Submit = async () => {
 
-    navigate("/checkout", {
-      state: { item: state?.item },
-    });
+    // navigate("/checkout", {
+    //   state: { item: state?.item },
+    // });
+
+    setShowSuccessModal(true);
+
+    setTimeout(() => {
+      setShowSuccessModal(false);
+       navigate('/success');
+      
+    }, 5000);
+
   }
 
   return (
@@ -204,6 +220,13 @@ const Details = () => {
           </Card>
 
         </>
+      )}
+
+{showSuccessModal && (
+        <ModalPleaseWait
+          message="Your success message goes here!"
+          onClose={handleCloseSuccessModal}
+        />
       )}
       <Box mt={100}> <Footer /> </Box>
 

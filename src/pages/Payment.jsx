@@ -36,10 +36,6 @@ const Payment = (item) => {
     setSelectedPaymentMethod(value);
   };
 
-  const handleSuccess = () => {
-    setShowSuccessModal(true);
-  };
-
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
   };

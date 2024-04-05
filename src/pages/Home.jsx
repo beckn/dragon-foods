@@ -25,7 +25,8 @@ import { useTranslation } from "react-i18next";
 import { MdFilterList } from "react-icons/md";
 import onSearch from "../assets/apiJson/on_search.json";
 import SubHeader from "../components/SubHeader";
-import  Footer from '../components/Footer';
+import Footer from '../components/Footer';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -38,7 +39,9 @@ const Home = () => {
   const [states, setStates] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("");
   const [searchPlaceholder, setSearchPlaceholder] = useState("Search...");
-  const [items, setItems] = useState(onSearch);
+  const [items, setItems] = useState({});
+  const location = useLocation();
+  const state = location?.state;
 
   useEffect(() => {
     setLoading(true);
@@ -46,6 +49,18 @@ const Home = () => {
   }, []);
 
   const searchResponse = async () => {
+    let filterData = {"stops": []};
+
+    if (state?.location) {
+      filterData['stops'] = {
+        "location": {
+          "city": {
+            "name": state?.location
+          }
+        }
+      }
+    }
+
     console.log({ env });
     let bodyData = {
       context: {
@@ -54,8 +69,8 @@ const Home = () => {
         version: "1.1.0",
         bap_id: env?.VITE_BAP_ID,
         bap_uri: env?.VITE_BAP_URI,
-        bpp_id: "apurva.dev.bpp",
-        bpp_uri: "https://bpp-dev.apurva.ai",
+        // bpp_id: "apurva.dev.bpp",
+        //bpp_uri: "https://bpp-dev.apurva.ai",
         transaction_id: transactionId,
         message_id: uuidv4(),
         timestamp: new Date().toISOString(),
@@ -64,13 +79,16 @@ const Home = () => {
         intent: {
           item: {
             descriptor: {
-              name: "",
+              name: "flood prediction",
             },
           },
         },
       },
     };
+
+    bodyData.message.intent['fulfillment'] = filterData;
     let response = await getallContent(bodyData);
+    setItems(response);
     console.log(response);
 
     if (
@@ -214,7 +232,7 @@ const Home = () => {
                 type="text"
                 placeholder={searchPlaceholder}
                 value={inputValue}
-                // onChange={handleChange}
+              // onChange={handleChange}
               />
               <InputRightElement onClick={handleClear} cursor="pointer">
                 {inputValue ? (
@@ -244,7 +262,7 @@ const Home = () => {
         ) : (
           <>
             <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
-              ** Price will vary based on the options selected
+              {t('PRICE_WILL_VARY')}
             </Text>
             <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
               {items?.message?.catalog?.providers.map(
