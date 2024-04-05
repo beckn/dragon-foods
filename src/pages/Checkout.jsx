@@ -10,6 +10,7 @@ import { header, buttonCss } from "../styles/branding";
 import { useNavigate } from 'react-router-dom';
 import  SubHeader from '../components/SubHeader';
 import  Footer from '../components/Footer';
+import onSelect from '../assets/apiJson/on_select.json';
 
 const Checkout = (item) => {
     const { t } = useTranslation();
@@ -18,11 +19,13 @@ const Checkout = (item) => {
     const navigate = useNavigate();
     const [name, setName] = useState('Jon Doe');
     const [email, setEmail] = useState('jondoe@gmail.com');
+   const [item, setItem] = useState(onSelect);
+
 
 
     const doPayment = async() =>{
         navigate('/payment', {
-            state: { item: state?.item},
+            state: { item: item},
           });
     }
 
@@ -35,10 +38,10 @@ const Checkout = (item) => {
                 <Text mb={5} fontSize={17} fontWeight={400} >{t('ORDER_OVERVIEW')}</Text>
                 <Card p={5} boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)" >
                     <Flex justifyContent="space-between" alignItems="center">
-                        <Text fontSize={15} fontWeight={600} >{state?.item?.descriptor?.name}</Text>
-                        <Text fontSize={15} fontWeight={600} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                        <Text fontSize={15} fontWeight={600} >{item?.message?.order?.items[0]?.descriptor?.name}</Text>
+                        <Text fontSize={15} fontWeight={600} >$ {item?.message?.order?.quote?.price?.value}</Text> {/* Example amount */}
                     </Flex>
-                    <Text mt={2} fontSize={12} fontWeight={400} >{t('PROVIDED_BY')} Sky Analytics</Text>
+                    <Text mt={2} fontSize={12} fontWeight={400} >{t('PROVIDED_BY')} {item?.message?.order?.provider?.descriptor?.name}</Text>
 
                 </Card>
             </Box>
@@ -66,17 +69,17 @@ const Checkout = (item) => {
                 <Card p={5} boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)" >
                     <Flex justifyContent="space-between" alignItems="center">
                         <Text fontSize={15} fontWeight={400} >{t('SUBTOTAL')}</Text>
-                        <Text fontSize={15} fontWeight={400} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                        <Text fontSize={15} fontWeight={400} >$ {item?.message?.order?.quote?.breakup[0]?.price?.value}</Text> {/* Example amount */}
                     </Flex>
                     <Flex mt={4} justifyContent="space-between" alignItems="center">
                         <Text fontSize={15} fontWeight={400} >{t('TAXES')}</Text>
-                        <Text fontSize={15} fontWeight={400} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                        <Text fontSize={15} fontWeight={400} >$ {item?.message?.order?.quote?.breakup[1]?.price?.value}</Text> {/* Example amount */}
                     </Flex>
                     <Box my={2} borderBottom="0.5px solid #BFBFBF" mb={4} />
 
                     <Flex  justifyContent="space-between" alignItems="center">
                         <Text fontSize={15} fontWeight={600} >{t('TOTAL')}</Text>
-                        <Text fontSize={15} fontWeight={600} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                        <Text fontSize={15} fontWeight={600} >$  {item?.message?.order?.quote?.price?.value}</Text> {/* Example amount */}
                     </Flex>
                 </Card>
             </Box>

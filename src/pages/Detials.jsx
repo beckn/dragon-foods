@@ -165,7 +165,7 @@ const Details = () => {
                   height={150}
                 /></Box>
               <Box m={3}>
-                <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.descriptor?.name}</Text>
+                <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.items[0]?.descriptor?.name}</Text>
                 <HStack mb={2}>
                   <Text fontSize={15} fontWeight={600}>{t('PROVIDED_BY')} </Text>
                   <Text fontSize={15}>{state?.item?.descriptor?.name} </Text>

@@ -95,7 +95,7 @@ const Search = () => {
 
                 <Select
                     boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)"
-                    width='37rem'
+                    width='36.5rem'
                     height='56px'
                     id="year"
                     mt={2}
@@ -146,14 +146,14 @@ const Search = () => {
                                         mt={5}
                                         height='100px'
                                         width='100px'
-                                        src={item?.items[0]?.descriptor?.images[0].url}
+                                        src={item?.descriptor?.images[0].url}
                                         alt="The house from the offer."
                                     />
                                 </Box>
                                 <Box bg={'#FFF'} borderRadius="lg" height='132px'>
                                     <Box p={2}>
 
-                                        <Text fontSize={15} noOfLines={1} fontWeight="bold" mb={2}>{item?.descriptor?.name}</Text>
+                                        <Text fontSize={15} noOfLines={1} fontWeight="bold" mb={2}>{item?.items[0]?.descriptor?.name}</Text>
                                         <HStack>
 
                                             <Text noOfLines={1} fontSize={12} mb={2}> {t('PROVIDED_BY')}: {item?.descriptor?.name}</Text>

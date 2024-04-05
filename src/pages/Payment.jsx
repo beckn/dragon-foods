@@ -132,25 +132,25 @@ const Payment = (item) => {
 
             <Card p={5} boxShadow="0px 4px 20px rgba(0, 0, 0, 0.08)" height="250px" width='400px'>
               <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize={15} fontWeight={600} >{state?.item?.descriptor?.name}</Text>
-                <Text fontSize={15} fontWeight={600} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                <Text fontSize={15} fontWeight={600} >{state?.item?.message?.order?.items[0]?.descriptor?.name}</Text>
+                {/* <Text fontSize={15} fontWeight={600} >$ {state?.item?.message?.order?.quote?.price?.value}</Text> Example amount */}
               </Flex>
-              <Text mt={2} fontSize={12} fontWeight={400} >{t('PROVIDED_BY')} Sky Analytics</Text>
+              <Text mt={2} fontSize={12} fontWeight={400} >{t('PROVIDED_BY')} {state?.item?.message?.order?.provider?.descriptor?.name} </Text>
               <Box my={2} borderBottom="0.5px solid #BFBFBF" mb={4} />
 
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize={15} fontWeight={400} >{t('SUBTOTAL')}</Text>
-                <Text fontSize={15} fontWeight={400} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                <Text fontSize={15} fontWeight={400} >$ {state?.item?.message?.order?.quote?.breakup[0]?.price?.value}</Text> {/* Example amount */}
               </Flex>
               <Flex mt={4} justifyContent="space-between" alignItems="center">
                 <Text fontSize={15} fontWeight={400} >{t('TAXES')}</Text>
-                <Text fontSize={15} fontWeight={400} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                <Text fontSize={15} fontWeight={400} >$ {state?.item?.message?.order?.quote?.breakup[1]?.price?.value}</Text> {/* Example amount */}
               </Flex>
               <Box my={2} borderBottom="0.5px solid #BFBFBF" mb={4} />
 
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontSize={15} fontWeight={600} >{t('TOTAL')}</Text>
-                <Text fontSize={15} fontWeight={600} >$ {state?.item?.price?.value}</Text> {/* Example amount */}
+                <Text fontSize={15} fontWeight={600} >$ {state?.item?.message?.order?.quote?.price?.value}</Text> {/* Example amount */}
               </Flex>
             </Card>
           </Flex>

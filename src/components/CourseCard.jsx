@@ -32,7 +32,7 @@ const CourseCard = ({ item }) => {
         maxWidth="100px"
         height="100px"
         src={item.descriptor.images[0]?.url || "path/to/dummy-image.jpg"}
-        alt={item.descriptor.name}
+        alt={item?.items[0]?.descriptor.name}
         borderRadius="10px"
         marginRight="20px"
       />
@@ -44,7 +44,7 @@ const CourseCard = ({ item }) => {
           textAlign="left"
           marginBottom="10px"
         >
-          {item.descriptor.name}
+          {item?.items[0]?.descriptor.name}
         </Text>
         <Text
           fontSize="12px"
