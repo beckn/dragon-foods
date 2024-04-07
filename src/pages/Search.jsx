@@ -123,19 +123,22 @@ const Search = () => {
         >
           {t("SEARCH")}
         </Button>
-        <VStack justifyContent="flex-start"  alignItems="flex-start">
+        <VStack justifyContent="flex-start" alignItems="flex-start">
           <Text mt={10} mb={2}>
             {t("FREQUESNTLY_BOUGHT")}
           </Text>
 
-          <HStack justifyContent="flex-start">
+          <HStack
+            justifyContent="flex-start"
+            flexWrap={{ base: "wrap", md: "nowrap" }}
+          >
             {items?.message?.catalog?.providers.map((item, index) => (
               <Card
                 background={"#F6F6F6"}
                 display="flex"
-                width={180}
+                width={{ base: "full", md: "180px" }}
                 height={234}
-                direction={{ base: "column", md: "row" }}
+                direction="column"
                 overflow="hidden"
                 borderWidth="1px"
                 borderRadius="lg"
