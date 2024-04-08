@@ -109,6 +109,6 @@ export const fonts = {
 
 export const buttonCss = {
   primaryBtnColor: '#00B088',
+  primaryBtnHoverColor: '#04a97b',
   primaryTxtColor: '#FFF'
-  
 }

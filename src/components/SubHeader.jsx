@@ -16,7 +16,7 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
     };
 
     const handleCartClick = () => {
-        navigate('/orderhistory');  // Redirect to the '/orderhistory' page
+        navigate('/orderhistory');
     };
 
     return (
@@ -41,7 +41,7 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
                     position="relative" 
                     mr={5} 
                     onClick={handleCartClick}
-                    cursor="pointer"  // Add cursor style here
+                    cursor="pointer"  
                 >
                     <Icon as={FiShoppingCart} boxSize="20px" />
                     {confirmData && (
