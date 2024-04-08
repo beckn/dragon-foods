@@ -120,7 +120,8 @@ const Search = () => {
           variant="solid"
           background={buttonCss?.primaryBtnColor}
           color={buttonCss?.primaryTxtColor}
-        >
+          _hover={{ bg: buttonCss?.primaryBtnHoverColor }}
+          >
           {t("SEARCH")}
         </Button>
         <VStack justifyContent="flex-start" alignItems="flex-start">
