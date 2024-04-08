@@ -40,9 +40,9 @@ export default function Login() {
                     <Text fontSize="4xl" fontWeight="bold">
                         {t('WELCOME_BACK')}
                     </Text>
-                    <Text fontSize="1xl">
+                    {/* <Text fontSize="1xl">
                         {t('LET_MAKE_EASY')}
-                    </Text>
+                    </Text> */}
                 </Box>
 
                 {/* Login Details Section */}

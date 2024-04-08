@@ -7,18 +7,19 @@ import dataList from '../assets/apiJson/checkoutForm.json';
 import { header, buttonCss } from "../styles/branding";
 import { useNavigate } from 'react-router-dom';
 import successImg from '../assets/images/SuccessMessage.png'
-import  Footer from '../components/Footer';
+import Footer from '../components/Footer';
 
 const SuccessPayment = (item, items) => {
   const { t } = useTranslation();
   const location = useLocation();
   const state = location?.state;
   const navigate = useNavigate();
+  const dataShareVia = localStorage.getItem('dataShare');
 
   const goToHome = () => {
 
     navigate("/search",);
-}
+  }
 
   return (
     <>
@@ -32,15 +33,26 @@ const SuccessPayment = (item, items) => {
 
         <Text fontSize={24} color="#23262F" fontWeight={600}> {t('ORDER_CONFIRMED')} </Text>
         <Text fontSize={16} color="#353945" fontWeight={400}> {t('SENT_YOUR_DATA_REPORT')} </Text>
-        <Text fontSize={16} color="#353945" fontWeight={600}> jondeo@gmail.com </Text>
+        {dataShareVia !== 'Email' &&  <HStack>
+            <Text fontSize={16} color="#23262F" fontWeight={400}>{dataShareVia} :</Text>
+            <Text fontSize={16} color="#353945" fontWeight={600}>  https://ww************* </Text>
+            </HStack>}
+        
+        
+        {dataShareVia == 'Email' &&
+          <HStack>
+            <Text fontSize={16} color="#23262F" fontWeight={400}> Email ID :</Text>
+            <Text fontSize={16} color="#353945" fontWeight={600}> john*********.com
+            </Text>  </HStack>}
+
 
         <Button mt={5} type="submit" onClick={goToHome} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
-        {t('GO_BACK_HOME')}
-      </Button>
+          {t('GO_BACK_HOME')}
+        </Button>
       </VStack>
       <Box mt={100}> <Footer /> </Box>
 
-      </>
+    </>
   );
 };
 

@@ -88,7 +88,7 @@ function Header() {
             />
             <MenuList>
               <MenuItem icon={<MdOutlineHistory fontSize="1.5em"/>} onClick={handleOrderHistoryClick}>
-                Order History
+               {t('ORDER_HISTORY')}
               </MenuItem>
             </MenuList>
           </Menu>

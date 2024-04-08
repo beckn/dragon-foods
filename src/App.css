@@ -30,3 +30,9 @@
     border-color:  #00B088;
     color: var(--chakra-colors-white);
 }
+
+.css-1ydjfm6[data-checked]{
+  background: #00B088 !important; 
+  border-color:  #00B088;
+
+}

@@ -2,7 +2,7 @@ import { Box, Button, Icon, Card, Input, Text, Image, VStack, Flex, HStack } fro
 import { IoChevronBack } from 'react-icons/io5';
 
 import React, { useEffect, useState } from 'react';
-import { getseletedData } from '../services/Apicall';
+import { getseletedData, getconfirmdata } from '../services/Apicall';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -44,7 +44,7 @@ const Details = () => {
   useEffect(() => {
     if (state && state.item) {
       // fetchSelectedCourseData();
-      const rating = state?.item?.rating;
+      const rating = state?.item?.rating == undefined ? 0 : state?.item?.rating;
       setFilledStars(Math.floor(rating)); // Number of filled stars
       setHasHalfStar(rating - filledStars >= 0.5); // Check if there is a half star
     }
@@ -62,8 +62,8 @@ const Details = () => {
           "version": "1.1.0",
           "bap_id": env?.VITE_BAP_ID,
           "bap_uri": env?.VITE_BAP_URI,
-          "bpp_id": state?.item?.bpp_id,
-          "bpp_uri": state?.item?.bpp_uri,
+          "bpp_id": state?.resContext?.bpp_id,
+          "bpp_uri": state?.resContext?.bpp_uri,
           "transaction_id": transactionId,
           // "message_id":messageId,
           "message_id": "06974a96-e996-4e22-9265-230f69f22f57",
@@ -146,14 +146,67 @@ const Details = () => {
     // navigate("/checkout", {
     //   state: { item: state?.item },
     // });
-
     setShowSuccessModal(true);
 
-    setTimeout(() => {
+    let bodyData = {
+
+      "context": {
+        "domain": env?.VITE_DOMAIN,
+        "action": "confirm",
+        "version": "1.1.0",
+        "bap_id": env?.VITE_BAP_ID,
+        "bap_uri": env?.VITE_BAP_URI,
+        "bpp_id": state?.resContext?.bpp_id,
+        "bpp_uri": state?.resContext?.bpp_uri,
+        "transaction_id": transactionId,
+        "message_id": uuidv4(),
+        "timestamp": new Date().toISOString()
+      },
+      "message": {
+        "order": {
+          "items": [
+            {
+              "id": state?.item?.items[0]?.id,
+              "tags": JSON.parse(localStorage.getItem('selectedData')),
+            },
+          ],
+          "fulfillments": [
+            {
+              "customer": {
+                "person": {
+                  "name": "John Doe",
+                  "age": "25"
+                },
+                "contact": {
+                  "phone": "8789111111",
+                  "email": "john@gmail.com"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    }
+
+
+
+    let response = await getconfirmdata(bodyData);
+
+    if (response && response.responses && response.responses.length > 0) {
       setShowSuccessModal(false);
-       navigate('/success');
-      
-    }, 5000);
+      navigate('/success', {
+          state: { item: response?.responses[0].message },
+         });
+
+    }
+
+
+    // setTimeout(() => {
+    //   setShowSuccessModal(false);
+    //   navigate('/success');
+
+    // }, 5000);
 
   }
 
@@ -179,7 +232,7 @@ const Details = () => {
                   p={4}
                   src={state?.item?.descriptor?.images[0].url} width={200}
                   height={150}
-                  objectFit="contain" 
+                  objectFit="contain"
                 /></Box>
               <Box m={3}>
                 <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{state?.item?.items[0]?.descriptor?.name}</Text>
@@ -222,7 +275,7 @@ const Details = () => {
         </>
       )}
 
-{showSuccessModal && (
+      {showSuccessModal && (
         <ModalPleaseWait
           message="Your success message goes here!"
           onClose={handleCloseSuccessModal}

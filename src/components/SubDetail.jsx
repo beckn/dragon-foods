@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from "react";
-import { Box, Button, Icon, Card, Input, Text, Image, VStack, Flex, HStack, Checkbox, FormControl, FormLabel, } from '@chakra-ui/react';
+import { Box, Button, Icon, Card, Input, Text, Image, VStack, Flex, HStack, Checkbox, FormControl, FormLabel, Radio, Stack } from '@chakra-ui/react';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 import dataList from '../assets/apiJson/checkoutForm.json';
@@ -15,6 +15,21 @@ const SubDetail = (item, items) => {
     const [selectedOptions, setSelectedOptions] = useState([]);
 
     const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedFulfillment, setSelectedFulfillment] = useState([]);
+    const [selectedDuration, setSelectedDuration] = useState('one Time');
+
+
+    const handleRadioChange = (event) => {
+        console.log('dataShare', event.target.value);
+        localStorage.setItem('dataShare', event.target.value)
+        setSelectedFulfillment(event.target.value);
+    };
+
+    const handleDurationChange = (event) => {
+        console.log('sub', event.target.value);
+        localStorage.setItem('sub', event.target.value)
+        setSelectedDuration(event.target.value);
+    };
 
     const handleCheckboxChange = (tagName, option) => {
         const tagIndex = selectedTags.findIndex(tag => tag.descriptor.name === tagName);
@@ -53,26 +68,92 @@ const SubDetail = (item, items) => {
                 </Box>
             </Card>
 
-           
 
-<Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
-            {state?.item?.items[0]?.tags?.map((tag, index) => (
-                <Box key={index} mb={8}>
-                    <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
-                    {tag.list.map((item, i) => (
-                        <Checkbox fontSize={12} ml={5}
-                            key={i}
-                            isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
-                            onChange={() => handleCheckboxChange(tag.descriptor.name, item.value)}
-                        >
-                            <Text fontSize={12} mt={1}> {item.value}</Text>
-                        </Checkbox>
+
+            <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
+                {state?.item?.items[0]?.tags?.map((tag, index) => (
+                    ( tag.descriptor.name != 'subscription_durations' &&  tag.descriptor.name != 'data_formats'  &&
+
+                    <Box key={index} mb={8}>
+                        <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
+                        {tag.list.map((item, i) => (
+                            <Checkbox fontSize={12} ml={5}
+                                key={i}
+                                isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
+                                onChange={() => handleCheckboxChange(tag.descriptor.name, item.value)}
+                            >
+                                <Text fontSize={12} mt={1}> {item.value}</Text>
+                            </Checkbox>
+                        ))}
+                    </Box>
+                
+                    ))
+                )}
+            </Card>
+
+            <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
+            <Flex direction="row" wrap="wrap">
+                {state?.item?.items[0]?.tags?.map((tag, index) => (
+                    ( tag.descriptor.name == 'data_formats'  &&
+
+                    <Box key={index} mb={8}>
+                        <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
+                        {tag.list.map((item, i) => (
+                            <Checkbox fontSize={12} ml={5}
+                                key={i}
+                                isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
+                                onChange={() => handleCheckboxChange(tag.descriptor.name, item.value)}
+                            >
+                                <Text fontSize={12} mt={1}> {item.value}</Text>
+                            </Checkbox>
+                        ))}
+                    </Box>
+                
+                    ))
+                )}
+                </Flex>
+                <FormLabel fontSize={12} fontWeight={600}>Data sharing modes</FormLabel>
+
+                <Flex direction="row" wrap="wrap">
+                    {state?.item?.fulfillments.map((fulfillment) => (
+                        <Box key={fulfillment.id} mr={3} mb={3} fontSize={12} ml={5}>
+                            <Radio 
+                                value={fulfillment.type}
+                                isChecked={selectedFulfillment === fulfillment.type}
+                                onChange={handleRadioChange}
+                            >
+                                <Text fontSize={12} mt={1} > {fulfillment.type}</Text>
+                            </Radio>
+                        </Box>
                     ))}
-                </Box>
-            ))}
-        </Card>
 
-            
+                </Flex>
+                <Flex direction="row" wrap="wrap">
+                {state?.item?.items[0]?.tags?.map((tag, index) => (
+                    ( tag.descriptor.name == 'subscription_durations' && 
+
+                    <Box key={index} mb={8}>
+                        <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name} </FormLabel>
+                        {tag.list.map((item, i) => (
+                            <Radio ml={5}
+                                key={i}
+                                value={item.value}
+                                isChecked={selectedDuration === item.value}
+                                onChange={handleDurationChange}
+                                // isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
+                            >
+                                <Text fontSize={12} mt={1} > {item.value}</Text>
+                            </Radio>
+                        ))}
+                    </Box>
+                
+                    ))
+                )}
+                </Flex>
+               
+            </Card>
+
+
         </>
     );
 };
