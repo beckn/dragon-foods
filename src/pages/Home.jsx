@@ -72,33 +72,44 @@ const Home = () => {
       },
       message: {
         intent: {
-          item: {
-            descriptor: {
-              name: state?.searchTxt
-            },
-          },
-          "tags": [
-            {
-                "descriptor": {
-                    "name": "operation"
-                },
-                "value": state?.year
-            }
-        ],
-        "fulfillment": {
-          "stops": [
-              {
-                  "location": {
-                      "city": {
-                          "name": state?.location
-                      }
-                  }
-              }
-          ]
-      }
-        },
       },
-    };
+    }};
+
+    if(state?.searchTxt)
+    {
+      bodyData['message']['intent']['item']= {
+        "descriptor": {
+            "name": state?.searchTxt
+        }
+    }
+  }
+
+    if(state?.location)
+    {
+      bodyData['message']['intent']['fulfillment'] =  {
+        "stops": [
+            {
+                "location": {
+                    "city": {
+                      "name": state?.location
+                    }
+                }
+            }
+        ]
+    }
+    }
+
+    if(state?.year)
+    {
+      bodyData['message']['intent']['tags'] =  [
+        {
+            "descriptor": {
+                "name": "operation"
+            },
+            "value": state?.year
+        }
+    ]
+    }
 
     let response = await getallContent(bodyData);
     setLoading(false);

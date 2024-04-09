@@ -14,7 +14,42 @@ const SuccessPayment = (item, items) => {
   const location = useLocation();
   const state = location?.state;
   const navigate = useNavigate();
-  const dataShareVia = localStorage.getItem('dataShare');
+  let dataShareVia = JSON.parse(localStorage.getItem('dataShare')).type;
+
+  let displayValue = '';
+  let subType = 'ID';
+
+
+  switch (dataShareVia) {
+    case 'Email':
+      displayValue = `john******@`+ t('APP_ID_COM');
+      subType = 'ID';
+      break;
+    case 'FTP':
+      displayValue = 'ftp://****' + t('APP_ID_COM');
+      subType = 'Link';
+      break;
+    case 'SFTP':
+      displayValue = 'sftp://****' + t('APP_ID_COM');
+      subType = 'Link';
+      break;
+    case 'SOAP API':
+      displayValue = `https://****`+  t('APP_ID_COM') +`/soap`;
+      subType = 'Link';
+      break;
+    case 'REST API':
+      displayValue = 'https://api.****.'+ t('APP_ID_COM') + '/rest';
+      subType = 'Link';
+      break;
+    case 'Cloud Storage':
+      displayValue = 'https://cloud.****.'+ t('APP_ID_COM');
+      subType = 'Link';
+      break;
+    default:{
+      dataShareVia = 'Email';
+      displayValue = `john******@`+ t('APP_ID_COM');
+    }
+  }
 
   const goToHome = () => {
 
@@ -33,18 +68,11 @@ const SuccessPayment = (item, items) => {
 
         <Text fontSize={24} color="#23262F" fontWeight={600}> {t('ORDER_CONFIRMED')} </Text>
         <Text fontSize={16} color="#353945" fontWeight={400}> {t('SENT_YOUR_DATA_REPORT')} </Text>
-        {dataShareVia !== 'Email' &&  <HStack>
-            <Text fontSize={16} color="#23262F" fontWeight={400}>{dataShareVia} :</Text>
-            <Text fontSize={16} color="#353945" fontWeight={600}>  https://ww************* </Text>
-            </HStack>}
-        
-        
-        {dataShareVia == 'Email' &&
-          <HStack>
-            <Text fontSize={16} color="#23262F" fontWeight={400}> Email ID :</Text>
-            <Text fontSize={16} color="#353945" fontWeight={600}> john*********.com
-            </Text>  </HStack>}
-
+       
+        <HStack>
+          <Text fontSize={16} color="#23262F" fontWeight={400}> {dataShareVia} {subType}:</Text>
+          <Text fontSize={16} color="#353945" fontWeight={600}>{displayValue}</Text>
+        </HStack>
 
         <Button mt={5} type="submit" onClick={goToHome} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
           {t('GO_BACK_HOME')}

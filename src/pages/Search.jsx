@@ -26,7 +26,7 @@ const Search = () => {
   const { t } = useTranslation();
   const [searchTxt, setSearchTxt] = useState("");
   const [location, setLocation] = useState("");
-  const [year, setYear] = useState("1 years");
+  const [year, setYear] = useState("");
   const [items, setItems] = useState(onSearch);
   const navigate = useNavigate();
 

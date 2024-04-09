@@ -107,18 +107,36 @@
           ],
           "fulfillments": [
             {
-              "id": "f1",
-              "type": "CLOUD"
+                "id": "F1",
+                "type": "FTP",
+                "tracking": false
             },
             {
-              "id": "f2",
-              "type": "REST"
+                "id": "F2",
+                "type": "SFTP",
+                "tracking": false
             },
             {
-              "id": "f3",
-              "type": "EMAIL"
+                "id": "F3",
+                "type": "REST API",
+                "tracking": false
+            },
+            {
+                "id": "F4",
+                "type": "SOAP API",
+                "tracking": false
+            },
+            {
+                "id": "F5",
+                "type": "Cloud Storage",
+                "tracking": false
+            },
+            {
+                "id": "F6",
+                "type": "Email",
+                "tracking": false
             }
-          ],
+        ],
           "items": [
             {
               "id": "1",
@@ -356,7 +374,7 @@
                 },
                 {
                   "descriptor": {
-                    "name": "Data formats"
+                    "name": "data_formats"
                   },
                   "list": [
                     {
@@ -390,7 +408,7 @@
                 },
                 {
                   "descriptor": {
-                    "name": "Subscription duration"
+                    "name": "subscription_durations"
                   },
                   "list": [
                     {
@@ -494,21 +512,40 @@
                 "name": "Weather Forecast"
               }
             }
-          ],
-          "fulfillments": [
-            {
-              "id": "f1",
-              "type": "CLOUD"
-            },
-            {
-              "id": "f2",
-              "type": "REST"
-            },
-            {
-              "id": "f3",
-              "type": "EMAIL"
-            }
-          ],
+          ], 
+        "fulfillments": [
+          {
+              "id": "F1",
+              "type": "FTP",
+              "tracking": false
+          },
+          {
+              "id": "F2",
+              "type": "SFTP",
+              "tracking": false
+          },
+          {
+              "id": "F3",
+              "type": "REST API",
+              "tracking": false
+          },
+          {
+              "id": "F4",
+              "type": "SOAP API",
+              "tracking": false
+          },
+          {
+              "id": "F5",
+              "type": "Cloud Storage",
+              "tracking": false
+          },
+          {
+              "id": "F6",
+              "type": "Email",
+              "tracking": false
+          }
+      ],
+
           "items": [
             {
               "id": "1",
@@ -746,7 +783,7 @@
                 },
                 {
                   "descriptor": {
-                    "name": "Data formats"
+                    "name": "data_formats"
                   },
                   "list": [
                     {
@@ -780,7 +817,7 @@
                 },
                 {
                   "descriptor": {
-                    "name": "Subscription duration"
+                    "name": "subscription_durations"
                   },
                   "list": [
                     {
@@ -887,18 +924,36 @@
           ],
           "fulfillments": [
             {
-              "id": "f1",
-              "type": "CLOUD"
+                "id": "F1",
+                "type": "FTP",
+                "tracking": false
             },
             {
-              "id": "f2",
-              "type": "REST"
+                "id": "F2",
+                "type": "SFTP",
+                "tracking": false
             },
             {
-              "id": "f3",
-              "type": "EMAIL"
+                "id": "F3",
+                "type": "REST API",
+                "tracking": false
+            },
+            {
+                "id": "F4",
+                "type": "SOAP API",
+                "tracking": false
+            },
+            {
+                "id": "F5",
+                "type": "Cloud Storage",
+                "tracking": false
+            },
+            {
+                "id": "F6",
+                "type": "Email",
+                "tracking": false
             }
-          ],
+        ],
           "items": [
             {
               "id": "1",
@@ -1136,7 +1191,7 @@
                 },
                 {
                   "descriptor": {
-                    "name": "Data formats"
+                    "name": "data_formats"
                   },
                   "list": [
                     {
@@ -1170,7 +1225,7 @@
                 },
                 {
                   "descriptor": {
-                    "name": "Subscription duration"
+                    "name": "subscription_durations"
                   },
                   "list": [
                     {

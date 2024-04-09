@@ -61,6 +61,7 @@
     "YEARS_IN_OPERATION":" years in operation",
     "REQUEST_OVERVIEW" : "Request Overview",
     "SEND_REQUEST" : "Send Request",
-    "NO_data_available":"No data available for the selected filters."
+    "NO_data_available":"No data available for the selected filters.",
+    "APP_ID_COM": "dragonfoods.com"
 
 }

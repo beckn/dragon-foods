@@ -22,13 +22,10 @@ import ModalPleaseWait from '../components/ModalPleaseWait';
 
 const Details = () => {
 
-  const uniqueId = uuidv4();
   const location = useLocation();
   const state = location?.state;
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-
   const [story, setStory] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -141,12 +138,13 @@ const Details = () => {
   };
 
 
-  const Submit = async () => {
+  const Submit =() => {
 
-    // navigate("/checkout", {
-    //   state: { item: state?.item },
-    // });
-    setShowSuccessModal(true);
+    navigate("/requestoverview", {
+      state: { item: state?.item, resContext: state?.resContext },
+    });
+
+   /* setShowSuccessModal(true);
 
     let bodyData = {
 
@@ -156,8 +154,8 @@ const Details = () => {
         "version": "1.1.0",
         "bap_id": env?.VITE_BAP_ID,
         "bap_uri": env?.VITE_BAP_URI,
-        "bpp_id": state?.resContext?.bpp_id,
-        "bpp_uri": state?.resContext?.bpp_uri,
+        "bpp_id": state?.resContext?.bpp_id ? state?.resContext?.bpp_id : 'flood-case-bpp',
+        "bpp_uri": state?.resContext?.bpp_uri ? state?.resContext?.bpp_uri: 'http://35.154.84.36:6004/',
         "transaction_id": transactionId,
         "message_id": uuidv4(),
         "timestamp": new Date().toISOString()
@@ -200,7 +198,7 @@ const Details = () => {
          });
 
     }
-
+*/
 
     // setTimeout(() => {
     //   setShowSuccessModal(false);
@@ -240,9 +238,8 @@ const Details = () => {
                   <Text fontSize={15} fontWeight={600}>{t('PROVIDED_BY')} </Text>
                   <Text fontSize={15}>{state?.item?.descriptor?.name} </Text>
                 </HStack>
-                <HStack>
-                  {/* <Icon as={FaStar} color="#F4B73F" />
-                  <Box fontSize={12} ml={1}>4.2</Box> */}
+               { state?.item?.rating && <HStack>
+
                   <HStack>
                     {[...Array(filledStars)].map((_, index) => (
                       <Icon key={index} as={BsStarFill} ml={1} color="yellow.400" />
@@ -253,7 +250,7 @@ const Details = () => {
                     ))}
                     <Text mt={1} fontSize={15}>{state?.item?.rating} {t('STARS')}</Text>
                   </HStack>
-                </HStack>
+                </HStack>}
 
               </Box>
             </HStack>
@@ -275,12 +272,6 @@ const Details = () => {
         </>
       )}
 
-      {showSuccessModal && (
-        <ModalPleaseWait
-          message="Your success message goes here!"
-          onClose={handleCloseSuccessModal}
-        />
-      )}
       <Box mt={100}> <Footer /> </Box>
 
     </>
