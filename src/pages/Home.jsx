@@ -312,13 +312,13 @@ const Home = () => {
               )}
             </SimpleGrid>
 
-            {items?.providers.length === 0 && (
+            {/* {items?.providers?.length === 0 && (
               <Box background={"#00b0881f"} textAlign={'center'} padding={5} width={'100%'}>{t("NO_data_available")}</Box>
-            )}
+            )} */}
 
             <Pagination
               currentPage={currentPage}
-              totalPages={Math.ceil(items?.providers.length / itemsPerPage)}
+              totalPages={Math.ceil(items?.providers?.length / itemsPerPage)}
               handlePageChange={handlePageChange}
             />
           </>
