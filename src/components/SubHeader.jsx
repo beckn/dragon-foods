@@ -34,36 +34,27 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
         )}
 
         {/* Title */}
-        <Text
-          fontSize="17px"
-          fontWeight="400"
-          lineHeight="29px"
-          textAlign="center"
-          fontFamily="Poppins"
-        >
-          {title}
-        </Text>
+        <Text fontSize={17} fontWeight="400">{title}</Text>
 
         {/* Cart icon with badge */}
-        <Box
-          position="relative"
-          mr={5}
-          // onClick={handleCartClick}
-          cursor="pointer"
+        <Box 
+            position="relative" 
+            mr={5} 
+            // onClick={handleCartClick}
+            cursor="pointer"  
         >
-          <Icon as={FiShoppingCart} boxSize="20px" />
-          {
+            <Icon as={FiShoppingCart} boxSize="20px" />
             <Badge
-              position="absolute"
-              borderRadius="full"
-              px="1"
-              background={buttonCss?.primaryBtnColor}
-              top="-9px"
-              right="-8px"
+                position="absolute"
+                borderRadius="full"
+                px="1"
+                background={buttonCss?.primaryBtnColor}
+                top="-9px"
+                right="-8px"
+                padding="0 5px"
             >
-              {"2"}
+                {cartItemCount}
             </Badge>
-          }
         </Box>
       </Flex>
     </Box>

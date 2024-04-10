@@ -34,5 +34,8 @@
 .css-1ydjfm6[data-checked]{
   background: #00B088 !important; 
   border-color:  #00B088;
+}
 
+.Toastify__toast-container--bottom-center {
+  width: 90% !important;
 }

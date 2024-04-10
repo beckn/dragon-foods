@@ -42,6 +42,7 @@ const Home = () => {
   const [searchPlaceholder, setSearchPlaceholder] = useState("Search...");
   const [items, setItems] = useState({});
   const [resContext, setResContext] = useState({});
+  const [res, setRes] = useState([]);
 
   const location = useLocation();
   const state = location?.state;
@@ -116,6 +117,7 @@ const Home = () => {
 
     setItems(response?.responses[0]?.message?.catalog);
     setResContext(response?.responses[0]?.context);
+    setRes(response?.responses);
 
     console.log(response);
 
@@ -312,7 +314,7 @@ const Home = () => {
               )}
             </SimpleGrid>
 
-            {/* {items?.providers?.length === 0 && (
+            {/* {!res?.length && items?.providers?.length === 0 && (
               <Box background={"#00b0881f"} textAlign={'center'} padding={5} width={'100%'}>{t("NO_data_available")}</Box>
             )} */}
 
