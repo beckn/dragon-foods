@@ -261,7 +261,7 @@ const Home = () => {
                 <Input
                   type="text"
                   placeholder={searchPlaceholder}
-                  defaultValue={searchPlaceholder} // Set default value here
+                  defaultValue={searchPlaceholder} 
                   readOnly
                   value={inputValue}
                   onChange={handleChange}
