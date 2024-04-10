@@ -69,6 +69,7 @@ const Search = () => {
         <InputGroup mb="20px">
           <Input
             type="text"
+            width="544px"
             height="56px"
             autoComplete="searchTxt"
             value={searchTxt}
@@ -76,18 +77,37 @@ const Search = () => {
             onChange={(e) => setSearchTxt(e.target.value)}
             id="searchTxt"
             fontSize={15}
+            boxShadow="0px 10px 24px 0px rgba(0, 0, 0, 0.1)"
+            _focus={{
+              boxShadow: "0px 10px 24px 0px rgba(0, 0, 0, 0.1)",
+            }}
+            border="none"
+            borderColor="transparent"
+            _placeholder={{
+              fontFamily: "Poppins",
+              fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: "15px",
+              lineHeight: "22.5px",
+            }}
           />
         </InputGroup>
         <Select
           mb="20px"
           id="location"
+          width="544px"
           height="56px"
           autoComplete="location"
           value={location}
           placeholder={t("ENTER_LOCATION")}
           onChange={(e) => setLocation(e.target.value)}
+          boxShadow="0px 10px 24px 0px rgba(0, 0, 0, 0.1)"
+          _focus={{
+            boxShadow: "0px 10px 24px 0px rgba(0, 0, 0, 0.1)",
+          }}
+          border="none"
+          borderColor="transparent"
         >
-          {/* Placeholder option */}
           <option value="" disabled hidden>
             {t("ENTER_LOCATION")}
           </option>
@@ -101,10 +121,17 @@ const Search = () => {
           defaultValue="1"
           mb="20px"
           id="year"
+          width="544px"
           height="56px"
           autoComplete="year"
           value={year}
           onChange={(e) => setYear(e.target.value)}
+          boxShadow="0px 10px 24px 0px rgba(0, 0, 0, 0.1)"
+          _focus={{
+            boxShadow: "0px 10px 24px 0px rgba(0, 0, 0, 0.1)",
+          }}
+          border="none"
+          borderColor="transparent"
         >
           {/* Generate options from 1 to 10 years */}
           {[...Array(10)].map((_, index) => (
@@ -114,17 +141,18 @@ const Search = () => {
           ))}
         </Select>
         <Button
-          width="full"
+          width="544px"
+          height="48px"
           onClick={searchData}
           type="submit"
           variant="solid"
           background={buttonCss?.primaryBtnColor}
           color={buttonCss?.primaryTxtColor}
           _hover={{ bg: buttonCss?.primaryBtnHoverColor }}
-          >
+        >
           {t("SEARCH")}
         </Button>
-       {/* <VStack justifyContent="flex-start" alignItems="flex-start">
+        {/* <VStack justifyContent="flex-start" alignItems="flex-start">
           <Text mt={10} mb={2}>
             {t("FREQUESNTLY_BOUGHT")}
           </Text>
