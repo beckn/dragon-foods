@@ -40,11 +40,11 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
                 <Box 
                     position="relative" 
                     mr={5} 
-                    onClick={handleCartClick}
+                    // onClick={handleCartClick}
                     cursor="pointer"  
                 >
                     <Icon as={FiShoppingCart} boxSize="20px" />
-                    {confirmData && (
+                    {(
                         <Badge
                             position="absolute"
                             borderRadius="full"

@@ -34,6 +34,7 @@ const Details = () => {
   const [hasHalfStar, setHasHalfStar] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  localStorage.setItem('selectedData', JSON.stringify([]))
 
   const messageId = uuidv4();
   const { itemId } = useParams();

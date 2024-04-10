@@ -54,7 +54,7 @@
     "WE_PROCESS_YOUR_PAYMENT":"While we process your request",
 
     "ORDER_CONFIRMED":"Request confirmed!",
-    "SENT_YOUR_DATA_REPORT":"The dataset has been sent to the requested destination",
+    "SENT_YOUR_DATA_REPORT":"The dataset will be shared via the chosen mode",
     "GO_BACK_HOME":"Go Back Home",
     "ORDER_HISTORY":"Request History",
     "VIEW_BALANCE":"View Balance",
