@@ -81,7 +81,7 @@ const CourseCard = ({ item }) => {
           <Flex alignItems="center">
             <Icon as={FaStar} color="yellow.400" />
             <Text fontSize="12px" fontWeight="400" lineHeight="18px" marginLeft="5px">
-              {item.rating || "4.5"}
+              {sItem?.rating || "4.5"}
             </Text>
           </Flex>
         </Flex>

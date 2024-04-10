@@ -120,6 +120,9 @@ const Home = () => {
 
     setResContext(response?.responses[0]?.context);
     setRes(response?.responses);
+    if(response?.responses.length > 2){
+    localStorage.setItem('frequentlyData', JSON.stringify(response?.responses));
+    }
 
     console.log(response);
 
