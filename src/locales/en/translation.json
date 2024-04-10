@@ -63,6 +63,7 @@
     "SEND_REQUEST" : "Send Request",
     "NO_data_available":"No data available for the selected filters.",
     "APP_ID_COM": "dragonfoods.com",
-    "AUTHENTICATION_FAILED":"Authentication Failed. Please try Again"
+    "AUTHENTICATION_FAILED":"Authentication Failed. Please try Again",
+    "Delay_in_fetching_the_details": "Sorry, there is a delay in process the request, Can you please try again now."
 
 }

@@ -6,7 +6,7 @@ import { buttonCss } from "../styles/branding";
 import { useLocation } from 'react-router-dom';
 
 
-import {  getconfirmdata } from '../services/Apicall';
+import { getconfirmdata } from '../services/Apicall';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -14,7 +14,8 @@ import Loader from '../components/Loader';
 const env = import.meta.env;
 import Footer from '../components/Footer';
 import ModalPleaseWait from '../components/ModalPleaseWait';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RequestOverview = () => {
   const { t } = useTranslation();
@@ -30,77 +31,92 @@ const RequestOverview = () => {
     setShowSuccessModal(false);
   };
 
+  function errorMessage(message) {
+    toast.error(message, {
+      position: 'bottom-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      theme: "colored",
+      pauseOnHover: true,
+      toastClassName: 'full-width-toast',
+      style: {
+        width: "100%", // Set width to 100% to make the toast full-width
+      }
+    });
+  }
+
+
   const Submit = async () => {
+    try {
+      setShowSuccessModal(true);
 
-    setShowSuccessModal(true);
+      setTimeout(() => {
+        setShowSuccessModal(false);
+      }, 40000);
 
-     setTimeout(() => {
-      setShowSuccessModal(false);
-    }, 40000);
+      let bodyData = {
 
-    let bodyData = {
-
-      "context": {
-        "domain": env?.VITE_DOMAIN,
-        "action": "confirm",
-        "version": "1.1.0",
-        "bap_id": env?.VITE_BAP_ID,
-        "bap_uri": env?.VITE_BAP_URI,
-        "bpp_id": state?.resContext?.bpp_id, //? state?.resContext?.bpp_id : 'flood-case-bpp',
-        "bpp_uri": state?.resContext?.bpp_uri,// ? state?.resContext?.bpp_uri: 'http://35.154.84.36:6004/',
-        "transaction_id": uuidv4(),
-        "message_id": uuidv4(),
-        "timestamp": new Date().toISOString()
-      },
-      "message": {
-        "order": {
-          "items": [
-            {
-              "id": state?.item?.items[0]?.id,
-              "fulfillment_ids": localStorage.getItem('dataShare') ? [ JSON.parse(localStorage.getItem('dataShare')).id] : '',
-              "tags": JSON.parse(localStorage.getItem('selectedData')),
-            },
-          ],
-          "fulfillments": [
-            {
-              "id": localStorage.getItem('dataShare') ? JSON.parse(localStorage.getItem('dataShare')).id : '',
-              "customer": {
-                "person": {
-                  "name": "John Doe",
-                  "age": "25"
-                },
-                "contact": {
-                  "phone": "8789111111",
-                  "email": "john@gmail.com"
+        "context": {
+          "domain": env?.VITE_DOMAIN,
+          "action": "confirm",
+          "version": "1.1.0",
+          "bap_id": env?.VITE_BAP_ID,
+          "bap_uri": env?.VITE_BAP_URI,
+          "bpp_id": state?.resContext?.bpp_id, //? state?.resContext?.bpp_id : 'flood-case-bpp',
+          "bpp_uri": state?.resContext?.bpp_uri,// ? state?.resContext?.bpp_uri: 'http://35.154.84.36:6004/',
+          "transaction_id": uuidv4(),
+          "message_id": uuidv4(),
+          "timestamp": new Date().toISOString()
+        },
+        "message": {
+          "order": {
+            "items": [
+              {
+                "id": state?.item?.items[0]?.id,
+                "fulfillment_ids": localStorage.getItem('dataShare') ? [JSON.parse(localStorage.getItem('dataShare')).id] : '',
+                "tags": JSON.parse(localStorage.getItem('selectedData')),
+              },
+            ],
+            "fulfillments": [
+              {
+                "id": localStorage.getItem('dataShare') ? JSON.parse(localStorage.getItem('dataShare')).id : '',
+                "customer": {
+                  "person": {
+                    "name": "John Doe",
+                    "age": "25"
+                  },
+                  "contact": {
+                    "phone": "8789111111",
+                    "email": "john@gmail.com"
+                  }
                 }
               }
-            }
-          ]
-        }
+            ]
+          }
 
+        }
+      }
+
+
+
+      let response = await getconfirmdata(bodyData);
+
+      if (response && response.responses && response.responses.length > 0) {
+        setShowSuccessModal(false);
+        localStorage.setItem('requestHistory', JSON.stringify(response?.responses[0]?.message?.order));
+        navigate('/success', {
+          state: { item: response?.responses[0].message },
+        });
+
+      } else {
+        errorMessage(t("Delay_in_fetching_the_details"));
+        setShowSuccessModal(false);
       }
     }
-
-
-
-    let response = await getconfirmdata(bodyData);
-
-    if (response && response.responses && response.responses.length > 0) {
+    catch (error) {
+      console.error('Error in Process request:', error);
       setShowSuccessModal(false);
-      localStorage.setItem('requestHistory', JSON.stringify(response?.responses[0]?.message?.order));
-      navigate('/success', {
-          state: { item: response?.responses[0].message },
-         });
-
     }
-
-
-    // setTimeout(() => {
-    //   setShowSuccessModal(false);
-    //   navigate('/success');
-
-    // }, 5000);
-
   }
 
   return (
@@ -130,9 +146,9 @@ const RequestOverview = () => {
           </Box>
         ))}
         <Button
-        mt={3}
+          mt={3}
           type="submit"
-            onClick={Submit}
+          onClick={Submit}
           width="20rem"
           variant="solid"
           background={buttonCss?.primaryBtnColor}

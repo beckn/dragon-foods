@@ -54,7 +54,7 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
                             right="-8px"
                             padding={" 0 5px;"}
                         >
-                            {'2'}
+                            {'1'}
                         </Badge>
                     )}
                 </Box>
