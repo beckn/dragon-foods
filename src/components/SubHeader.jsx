@@ -34,7 +34,7 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
                 )}
 
                 {/* Title */}
-                <Text fontSize="lg" fontWeight="bold">{title}</Text>
+                <Text fontSize={17} fontWeight="400">{title}</Text>
 
                 {/* Cart icon with badge */}
                 <Box 

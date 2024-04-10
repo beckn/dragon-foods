@@ -222,7 +222,7 @@ const Details = () => {
       ) : (
         <>
 
-          <Card mx={'100px'} mt={30} p={5}>
+          <Card mx={'100px'} mt={30} p={5} boxShadow="0px 8px 10px 0px #0000001A">
             <HStack>
               <Box background="rgba(255, 255, 255, 1)" alignItems="stretch"
                 justifyContent="center" borderRadius="12px"
@@ -264,7 +264,7 @@ const Details = () => {
                 <Button type="submit" onClick={Submit} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
                   {t('PROCEED')}
                 </Button>
-                <Text fontSize={12} ml={4}>{t('PRICE_WILL_VARY')}</Text>
+                {/* <Text fontSize={12} ml={4}>{t('PRICE_WILL_VARY')}</Text> */}
               </HStack>
             </Card>
 

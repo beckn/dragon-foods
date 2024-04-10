@@ -91,7 +91,7 @@ const SubDetail = (item, items) => {
 
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
                 {state?.item?.items[0]?.tags?.map((tag, index) => (
-                    (tag.descriptor.name != 'subscription_durations' && tag.descriptor.name != 'data_formats' &&
+                    (tag.descriptor.name != 'Subscription duration' && tag.descriptor.name != 'Data formats' &&
 
                         <Box key={index} mb={8}>
                             <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
@@ -113,7 +113,7 @@ const SubDetail = (item, items) => {
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
                 <Flex direction="row" wrap="wrap">
                     {state?.item?.items[0]?.tags?.map((tag, index) => (
-                        (tag.descriptor.name == 'data_formats' &&
+                        (tag.descriptor.name == 'Data formats' &&
 
                             <Box key={index} mb={8}>
                                 <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
@@ -149,7 +149,7 @@ const SubDetail = (item, items) => {
                 </Flex>
                 <Flex direction="row" wrap="wrap">
                     {state?.item?.items[0]?.tags?.map((tag, index) => (
-                        (tag.descriptor.name == 'subscription_durations' &&
+                        (tag.descriptor.name == 'Subscription duration' &&
 
                             <Box key={index} mb={8}>
                                 <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name} </FormLabel>

@@ -66,15 +66,15 @@ const SuccessPayment = (item, items) => {
           mb={10}
         />
 
-        <Text fontSize={24} color="#23262F" fontWeight={600}> {t('ORDER_CONFIRMED')} </Text>
+        <Text fontSize={24} color="#23262F" fontWeight={400}> {t('ORDER_CONFIRMED')} </Text>
         <Text fontSize={16} color="#353945" fontWeight={400}> {t('SENT_YOUR_DATA_REPORT')} </Text>
        
         <HStack>
           <Text fontSize={16} color="#23262F" fontWeight={400}> {dataShareVia} {subType}:</Text>
-          <Text fontSize={16} color="#353945" fontWeight={600}>{displayValue}</Text>
+          <Text fontSize={16} color="#353945" fontWeight={400}>{displayValue}</Text>
         </HStack>
 
-        <Button mt={5} type="submit" onClick={goToHome} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
+        <Button mt={5} type="submit" fontSize={15} onClick={goToHome} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
           {t('GO_BACK_HOME')}
         </Button>
       </VStack>
