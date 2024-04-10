@@ -25,9 +25,9 @@ import { useTranslation } from "react-i18next";
 import { MdFilterList } from "react-icons/md";
 import onSearch from "../assets/apiJson/on_search.json";
 import SubHeader from "../components/SubHeader";
-import Footer from '../components/Footer';
-import { useLocation } from 'react-router-dom';
-import Loader from '../components/Loader';
+import Footer from "../components/Footer";
+import { useLocation } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -53,123 +53,117 @@ const Home = () => {
   }, []);
 
   const searchResponse = async () => {
+    try {
+      console.log({ env });
+      let bodyData = {
+        context: {
+          domain: env?.VITE_DOMAIN,
+          action: "search",
+          version: "1.1.0",
+          bap_id: env?.VITE_BAP_ID,
+          bap_uri: env?.VITE_BAP_URI,
+          // bpp_id: "apurva.dev.bpp",
+          //bpp_uri: "https://bpp-dev.apurva.ai",
+          transaction_id: transactionId,
+          message_id: uuidv4(),
+          timestamp: new Date().toISOString(),
+        },
+        message: {
+          intent: {},
+        },
+      };
 
-    try{
-    
-
-    console.log({ env });
-    let bodyData = {
-      context: {
-        domain: env?.VITE_DOMAIN,
-        action: "search",
-        version: "1.1.0",
-        bap_id: env?.VITE_BAP_ID,
-        bap_uri: env?.VITE_BAP_URI,
-        // bpp_id: "apurva.dev.bpp",
-        //bpp_uri: "https://bpp-dev.apurva.ai",
-        transaction_id: transactionId,
-        message_id: uuidv4(),
-        timestamp: new Date().toISOString(),
-      },
-      message: {
-        intent: {
-      },
-    }};
-
-    if(state?.searchTxt)
-    {
-      bodyData['message']['intent']['item']= {
-        "descriptor": {
-            "name": state?.searchTxt
-        }
-    }
-  }
-
-    if(state?.location)
-    {
-      bodyData['message']['intent']['fulfillment'] =  {
-        "stops": [
-            {
-                "location": {
-                    "city": {
-                      "name": state?.location
-                    }
-                }
-            }
-        ]
-    }
-    }
-
-    if(state?.year)
-    {
-      bodyData['message']['intent']['tags'] =  [
-        {
-            "descriptor": {
-                "name": "operation"
-            },
-            "value": state?.year
-        }
-    ]
-    }
-
-    let response = await getallContent(bodyData);
-    setLoading(false);
-
-    setItems(response?.responses[0]?.message?.catalog);
-    setResContext(response?.responses[0]?.context);
-    setRes(response?.responses);
-
-    console.log(response);
-
-    if (
-      response &&
-      response.data &&
-      response.data[env?.VITE_DB_CACHE] &&
-      Array.isArray(response.data[env?.VITE_DB_CACHE])
-    ) {
-      let arrayOfObjects = [];
-      for (const providers of response.data[env?.VITE_DB_CACHE]) {
-        let obj = {
-          item_id: providers.item_id,
-          title: providers.title ? providers.title : "",
-          description: providers.description ? providers.description : "",
-          provider_id: providers.provider_id,
-          provider_name: providers.provider_name,
-          bpp_id: providers.bpp_id,
-          bpp_uri: providers.bpp_uri,
-          icon: providers.icon ? providers.icon : "",
-          image_url: providers.image_url ? providers.image_url : "",
-          shortDescription: providers.short_desc ? providers.short_desc : "",
+      if (state?.searchTxt) {
+        bodyData["message"]["intent"]["item"] = {
+          descriptor: {
+            name: state?.searchTxt,
+          },
         };
-        arrayOfObjects.push(obj);
       }
 
-      console.log("arrayOfObjects", arrayOfObjects);
-      setStory(arrayOfObjects);
+      if (state?.location) {
+        bodyData["message"]["intent"]["fulfillment"] = {
+          stops: [
+            {
+              location: {
+                city: {
+                  name: state?.location,
+                },
+              },
+            },
+          ],
+        };
+      }
 
-      // Extracting states from the response
-      const extractedStates = response.data[env?.VITE_DB_CACHE].map(
-        (provider) => provider.state
-      );
-      let allStates = [];
-      extractedStates.forEach((state) => {
-        if (Array.isArray(state)) {
-          allStates.push(state.join(","));
-        } else {
-          allStates.push(state);
+      if (state?.year) {
+        bodyData["message"]["intent"]["tags"] = [
+          {
+            descriptor: {
+              name: "operation",
+            },
+            value: state?.year,
+          },
+        ];
+      }
+
+      let response = await getallContent(bodyData);
+      setLoading(false);
+
+      setItems(response?.responses[0]?.message?.catalog);
+      setResContext(response?.responses[0]?.context);
+      setRes(response?.responses);
+
+      console.log(response);
+
+      if (
+        response &&
+        response.data &&
+        response.data[env?.VITE_DB_CACHE] &&
+        Array.isArray(response.data[env?.VITE_DB_CACHE])
+      ) {
+        let arrayOfObjects = [];
+        for (const providers of response.data[env?.VITE_DB_CACHE]) {
+          let obj = {
+            item_id: providers.item_id,
+            title: providers.title ? providers.title : "",
+            description: providers.description ? providers.description : "",
+            provider_id: providers.provider_id,
+            provider_name: providers.provider_name,
+            bpp_id: providers.bpp_id,
+            bpp_uri: providers.bpp_uri,
+            icon: providers.icon ? providers.icon : "",
+            image_url: providers.image_url ? providers.image_url : "",
+            shortDescription: providers.short_desc ? providers.short_desc : "",
+          };
+          arrayOfObjects.push(obj);
         }
-      });
-      const uniqueStates = [...new Set(allStates.join(",").split(","))];
-      const filteredStates = uniqueStates.filter(
-        (state) => state && state !== "All"
-      );
-      setStates(filteredStates);
-    } else {
-      console.error("Invalid response format");
+
+        console.log("arrayOfObjects", arrayOfObjects);
+        setStory(arrayOfObjects);
+
+        // Extracting states from the response
+        const extractedStates = response.data[env?.VITE_DB_CACHE].map(
+          (provider) => provider.state
+        );
+        let allStates = [];
+        extractedStates.forEach((state) => {
+          if (Array.isArray(state)) {
+            allStates.push(state.join(","));
+          } else {
+            allStates.push(state);
+          }
+        });
+        const uniqueStates = [...new Set(allStates.join(",").split(","))];
+        const filteredStates = uniqueStates.filter(
+          (state) => state && state !== "All"
+        );
+        setStates(filteredStates);
+      } else {
+        console.error("Invalid response format");
+      }
+    } catch (error) {
+      console.error("Error performing search:", error);
     }
-  } catch (error) {
-    console.error("Error performing search:", error);
-  }
   };
 
   //Filter functionality
@@ -256,79 +250,81 @@ const Home = () => {
   return (
     <>
       <SubHeader title={t("SEARCH_RESULT")} cartItemCount={2} />
-      {loading ? (<Loader />
+      {loading ? (
+        <Loader />
       ) : (
-      <Box p={4} marginBottom="60px" marginX={{ base: 4, md: 8, lg: 16 }}>
-        {/* search bar */}
-        <Flex alignItems="center">
-          {uiConfig?.isSearch && (
-            <InputGroup flex="1" mr={4}>
-              <Input
-                type="text"
-                placeholder={searchPlaceholder}
-                defaultValue={searchPlaceholder} // Set default value here
-                readOnly
-                value={inputValue}
-               onChange={handleChange}
+        <Box p={4} marginBottom="60px" marginX={{ base: 4, md: 8, lg: 16 }}>
+          {/* search bar */}
+          <Flex alignItems="start" justify="start">
+            {uiConfig?.isSearch && (
+              <InputGroup flex="0.5" mr={4}>
+                <Input
+                  type="text"
+                  placeholder={searchPlaceholder}
+                  defaultValue={searchPlaceholder} // Set default value here
+                  readOnly
+                  value={inputValue}
+                  onChange={handleChange}
+                />
+                <InputRightElement onClick={handleClear} cursor="pointer">
+                  {inputValue ? (
+                    <RxCrossCircled color="gray.300" />
+                  ) : (
+                    <IoIosSearch color="gray.300" />
+                  )}
+                </InputRightElement>
+              </InputGroup>
+            )}
+            {uiConfig?.isAdvFilter && (
+              <IconButton
+                aria-label="Filter"
+                icon={<MdFilterList />}
+                onClick={() => setSelectedFilter("")}
+                variant="ghost"
+                fontSize="24px"
               />
-              <InputRightElement onClick={handleClear} cursor="pointer">
-                {inputValue ? (
-                  <RxCrossCircled color="gray.300" />
-                ) : (
-                  <IoIosSearch color="gray.300" />
-                )}
-              </InputRightElement>
-            </InputGroup>
-          )}
-          {uiConfig?.isAdvFilter && (
-            <IconButton
-              aria-label="Filter"
-              icon={<MdFilterList />}
-              onClick={() => setSelectedFilter("")}
-              variant="ghost"
-              fontSize="24px"
-            />
-          )}
-        </Flex>
+            )}
+          </Flex>
 
-        {inputValue.length > 0 ? (
-          <SearchScreen
-            searchText={visibleResults}
-            transactionId={transactionId}
-          />
-        ) : (
-          <>
-            {/* <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
+          {inputValue.length > 0 ? (
+            <SearchScreen
+              searchText={visibleResults}
+              transactionId={transactionId}
+            />
+          ) : (
+            <>
+              {/* <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
               {t('PRICE_WILL_VARY')}
             </Text> */}
-            <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
-              {items?.providers?.map(
-                (item, index) => (
+              <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
+                {items?.providers?.map((item, index) => (
                   <CourseCard
                     key={index}
                     item={item}
                     resContext={resContext}
                     transactionId={transactionId}
                   />
-                )
-              )}
-            </SimpleGrid>
+                ))}
+              </SimpleGrid>
 
-            {/* {!res?.length && items?.providers?.length === 0 && (
+              {/* {!res?.length && items?.providers?.length === 0 && (
               <Box background={"#00b0881f"} textAlign={'center'} padding={5} width={'100%'}>{t("NO_data_available")}</Box>
             )} */}
 
-            <Pagination
-              currentPage={currentPage}
-              totalPages={Math.ceil(items?.providers?.length / itemsPerPage)}
-              handlePageChange={handlePageChange}
-            />
-          </>
-        )}
-      </Box>)}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(items?.providers?.length / itemsPerPage)}
+                handlePageChange={handlePageChange}
+              />
+            </>
+          )}
+        </Box>
+      )}
 
-      <Box mt={100}> <Footer /> </Box>
-      
+      <Box mt={100}>
+        {" "}
+        <Footer />{" "}
+      </Box>
     </>
   );
 };
