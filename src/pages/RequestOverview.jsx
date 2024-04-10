@@ -46,8 +46,8 @@ const RequestOverview = () => {
         "version": "1.1.0",
         "bap_id": env?.VITE_BAP_ID,
         "bap_uri": env?.VITE_BAP_URI,
-        "bpp_id": state?.resContext?.bpp_id ? state?.resContext?.bpp_id : 'flood-case-bpp',
-        "bpp_uri": state?.resContext?.bpp_uri ? state?.resContext?.bpp_uri: 'http://35.154.84.36:6004/',
+        "bpp_id": state?.resContext?.bpp_id, //? state?.resContext?.bpp_id : 'flood-case-bpp',
+        "bpp_uri": state?.resContext?.bpp_uri,// ? state?.resContext?.bpp_uri: 'http://35.154.84.36:6004/',
         "transaction_id": uuidv4(),
         "message_id": uuidv4(),
         "timestamp": new Date().toISOString()
@@ -57,13 +57,13 @@ const RequestOverview = () => {
           "items": [
             {
               "id": state?.item?.items[0]?.id,
-              "fulfillment_ids": [ JSON.parse(localStorage.getItem('dataShare')).id],
+              "fulfillment_ids": localStorage.getItem('dataShare') ? [ JSON.parse(localStorage.getItem('dataShare')).id] : '',
               "tags": JSON.parse(localStorage.getItem('selectedData')),
             },
           ],
           "fulfillments": [
             {
-              "id":  JSON.parse(localStorage.getItem('dataShare')).id,
+              "id": localStorage.getItem('dataShare') ? JSON.parse(localStorage.getItem('dataShare')).id : '',
               "customer": {
                 "person": {
                   "name": "John Doe",

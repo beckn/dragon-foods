@@ -124,7 +124,7 @@ const Search = () => {
           >
           {t("SEARCH")}
         </Button>
-        <VStack justifyContent="flex-start" alignItems="flex-start">
+       {/* <VStack justifyContent="flex-start" alignItems="flex-start">
           <Text mt={10} mb={2}>
             {t("FREQUESNTLY_BOUGHT")}
           </Text>
@@ -197,7 +197,7 @@ const Search = () => {
               </Card>
             ))}
           </HStack>
-        </VStack>
+        </VStack> */}
 
         <Box mt={100}>
           {" "}

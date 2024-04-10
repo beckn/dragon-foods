@@ -247,7 +247,7 @@ const Home = () => {
     if (selectedFilter && selectedFilter !== "All") {
       setSearchPlaceholder(`You are Searching in ${selectedFilter}`);
     } else {
-      setSearchPlaceholder('Flood prediction data');
+      setSearchPlaceholder(state?.searchTxt);
     }
   }, [selectedFilter]);
 
