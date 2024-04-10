@@ -153,7 +153,7 @@ const Search = () => {
           {t("SEARCH")}
         </Button>
 
-        { items != null &&
+        { (items != null && items.length ) &&
          <VStack justifyContent="flex-start" alignItems="flex-start">
           <Text mt={10} mb={2}>
             {t("FREQUESNTLY_BOUGHT")}

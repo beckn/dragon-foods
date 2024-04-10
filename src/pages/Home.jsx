@@ -55,8 +55,6 @@ const Home = () => {
   const searchResponse = async () => {
 
     try{
-    
-
     console.log({ env });
     let bodyData = {
       context: {
@@ -65,8 +63,6 @@ const Home = () => {
         version: "1.1.0",
         bap_id: env?.VITE_BAP_ID,
         bap_uri: env?.VITE_BAP_URI,
-        // bpp_id: "apurva.dev.bpp",
-        //bpp_uri: "https://bpp-dev.apurva.ai",
         transaction_id: transactionId,
         message_id: uuidv4(),
         timestamp: new Date().toISOString(),
@@ -120,9 +116,6 @@ const Home = () => {
 
     setResContext(response?.responses[0]?.context);
     setRes(response?.responses);
-    if(response?.responses.length > 2){
-    localStorage.setItem('frequentlyData', JSON.stringify(response?.responses));
-    }
 
     console.log(response);
 

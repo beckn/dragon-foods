@@ -4,6 +4,9 @@ import { header, buttonCss } from "../styles/branding";
 import { useTranslation } from "react-i18next";
 import poweredBy from '../assets/images/poweredby.png';
 import { useNavigate } from 'react-router-dom';
+const env = import.meta.env;
+import { v4 as uuidv4 } from "uuid";
+import { getallContent } from "../services/Apicall";
 
 
 export default function Login() {
@@ -23,6 +26,37 @@ export default function Login() {
             setIsValid(false);
         }
     };
+    useEffect(() => {
+        frequentSearch();
+    },[])
+
+   
+    const frequentSearch = async () => {
+        if(localStorage.getItem('frequentlyData') == null || localStorage.getItem('frequentlyData') == 'undefined'){
+        
+            let bodyData = {
+                context: {
+                  domain: env?.VITE_DOMAIN,
+                  action: "search",
+                  version: "1.1.0",
+                  bap_id: env?.VITE_BAP_ID,
+                  bap_uri: env?.VITE_BAP_URI,
+                  transaction_id: uuidv4(),
+                  message_id: uuidv4(),
+                  timestamp: new Date().toISOString(),
+                },
+                message: {
+                  intent: {
+                },
+              }};
+  
+              let response = await getallContent(bodyData);
+              if(response.responses.length){
+              localStorage.setItem('frequentlyData', JSON.stringify(response?.responses));
+              }
+              
+        }
+      }
 
     return (
         <>
