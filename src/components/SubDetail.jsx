@@ -27,10 +27,6 @@ const SubDetail = () => {
     };
 
     const handleDurationChange = (tagName, option) => {
-        // console.log('sub', event.target.value);
-        // localStorage.setItem('sub', event.target.value)
-        // setSelectedDuration(event.target.value);
-
         const tagIndex = selectedTags.findIndex(tag => tag.descriptor.name === tagName);
         if (tagIndex !== -1) {
             const newTags = [...selectedTags];
@@ -46,7 +42,8 @@ const SubDetail = () => {
                 list: [{ value: option }]
             }]);
         }
-        console.log(localStorage.setItem('selectedData', JSON.stringify(selectedTags)));
+
+        localStorage.setItem('selectedData', JSON.stringify(selectedTags));
 
     };
 
@@ -73,7 +70,7 @@ const SubDetail = () => {
             }]);
         }
 
-        console.log(localStorage.setItem('selectedData', JSON.stringify(selectedTags)));
+        localStorage.setItem('selectedData', JSON.stringify(selectedTags));
     };
 
     return (
