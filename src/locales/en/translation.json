@@ -62,6 +62,7 @@
     "REQUEST_OVERVIEW" : "Request Overview",
     "SEND_REQUEST" : "Send Request",
     "NO_data_available":"No data available for the selected filters.",
-    "APP_ID_COM": "dragonfoods.com"
+    "APP_ID_COM": "dragonfoods.com",
+    "AUTHENTICATION_FAILED":"Authentication Failed. Please try Again"
 
 }

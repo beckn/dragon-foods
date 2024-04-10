@@ -52,6 +52,7 @@ const SubHeader = ({ title, cartItemCount, back = true }) => {
                             background={buttonCss?.primaryBtnColor}
                             top="-9px"
                             right="-8px"
+                            padding={" 0 5px;"}
                         >
                             {'2'}
                         </Badge>
