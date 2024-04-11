@@ -96,7 +96,7 @@ const SubDetail = () => {
 
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
                 {item?.items[0]?.tags?.map((tag, index) => (
-                    (tag.descriptor.name != 'Subscription duration' && tag.descriptor.name != 'Data formats' &&
+                    (tag?.list?.length > 0 && tag.descriptor.name != 'Subscription duration' && tag.descriptor.name != 'Data formats' &&
 
                         <Box key={index} mb={8}>
                             <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>

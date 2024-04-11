@@ -64,7 +64,7 @@ const Search = () => {
       <SubHeader cartItemCount={2} back={false} />
       <Box maxW="600px" mx="auto" p="20px">
         <Center mb="20px">
-          <Image src={header?.headerContent?.logoSrc} alt="Logo" />
+          <Image width={'302px'} height={'153px'} src={header?.headerContent?.logoSrc} alt="Logo" />
         </Center>
         <InputGroup mb="20px">
           <Input

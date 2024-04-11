@@ -62,13 +62,11 @@ function Header() {
               boxSize="60px"
             />
           )}
-          <Text
-            fontSize={20}
-            fontWeight={800}
-            color={header?.headerContent?.appTitleColor}
-          >
-            {header?.headerContent?.title1}
-          </Text>
+          <Image
+              src={header?.headerContent?.headerLogo}
+              alt="Forum Logo"
+              marginRight="2"
+            />
         </Flex>
 
         {/* Right-hand side */}

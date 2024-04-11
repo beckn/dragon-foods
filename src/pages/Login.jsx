@@ -60,11 +60,11 @@ export default function Login() {
 
     return (
         <>
-            <HStack display="flex" justifyContent="center" height="100vh" mt={10}>
+            <HStack display="flex" justifyContent="center" height="100vh" mt={1}>
                 <VStack textAlign="center" maxW="600px" width="100%" bg="white">
                     <Image
-                        height='153px'
-                        width='333px'
+                        height='200px'
+                        width='395px'
                         src={header?.headerContent?.logoSrc}
                         alt="The house from the offer."
                     />

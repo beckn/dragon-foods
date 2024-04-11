@@ -1,6 +1,7 @@
 // import headerImage from "../assets/headerLogo.svg";
 import translateImage from "../assets/translate.png";
 import appIcon from '../assets/images/logo.png'
+import headerLogo from '../assets/images/headerLogo.png'
 
 const colors = {
   brand: {
@@ -34,6 +35,7 @@ export const header = {
     title1: "Dragon Foods",
     title2: "Platform for Climate Resilient Data Highways",
     logoSrc: appIcon,
+    headerLogo: headerLogo,
     appTitleColor: "#00B088",
     headerBgColor: "#EFEFEF"
   },
