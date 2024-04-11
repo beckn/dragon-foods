@@ -64,6 +64,6 @@
     "NO_data_available":"No data available for the selected filters.",
     "APP_ID_COM": "dragonfoods.com",
     "AUTHENTICATION_FAILED":"Authentication Failed. Please try Again",
-    "Delay_in_fetching_the_details": "Sorry, there is a delay in processing the request, Please try again now."
-
+    "Delay_in_fetching_the_details": "Sorry, there is a delay in processing the request, Please try again now.",
+    "ENTER_MANDATORY_OPTION_PROCEED":"Enter the mandatory options to proceed"
 }
