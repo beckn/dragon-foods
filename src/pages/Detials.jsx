@@ -175,13 +175,16 @@ console.log("Is dataShare key set:", isDataShareSet);
   function errorMessage(message) {
     toast.error(message, {
       position: 'bottom-center',
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
-      theme: "colored",
+      // theme: "colored",
       pauseOnHover: true,
       toastClassName: 'full-width-toast',
       style: {
-        width: "100%", // Set width to 100% to make the toast full-width
+        border:"1px solid #bfbfbf38",
+        color: '#c63535b8',
+        margin: '0 21px',
+        width: "96%", // Set width to 100% to make the toast full-width
       }
     });
   }
