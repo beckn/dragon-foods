@@ -293,7 +293,7 @@ console.log("Is dataShare key set:", isDataShareSet);
                     {[...Array(5 - filledStars - (hasHalfStar ? 1 : 0))].map((_, index) => (
                       <Icon key={index + filledStars + 1} as={BsStarFill} ml={1} color="gray.300" />
                     ))}
-                    <Text mt={1} fontSize={15}>{item?.rating} {t('STARS')}</Text>
+                    <Text mt={1} fontSize={12}>{item?.rating} {t('STARS')}</Text>
                   </HStack>
                 </HStack>}
 
@@ -305,7 +305,7 @@ console.log("Is dataShare key set:", isDataShareSet);
 
             <Card mt={5} p={5} borderRadius="12px" border="1px solid rgba(191, 191, 191, 1)">
               <HStack>
-                <Button type="submit" onClick={Submit} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
+                <Button type="submit" onClick={Submit}  fontWeight={400} borderRadius={'12px'} width='20rem' variant="solid" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
                   {t('PROCEED')}
                 </Button>
                 <Text fontSize={12} ml={4}>{t('PRICE_WILL_VARY')}</Text>

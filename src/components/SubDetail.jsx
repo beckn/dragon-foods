@@ -98,10 +98,10 @@ const SubDetail = () => {
                 {item?.items[0]?.tags?.map((tag, index) => (
                     (tag?.list?.length > 0 && tag.descriptor.name != 'Subscription duration' && tag.descriptor.name != 'Data formats' &&
 
-                        <Box key={index} mb={8}>
+                        <Box key={index} mb={9}>
                             <FormLabel fontSize={12} fontWeight={600}>{tag.descriptor.name}</FormLabel>
                             {tag.list.map((item, i) => (
-                                <Checkbox fontSize={12} ml={5}
+                                <Checkbox fontSize={12} mr={'40px'}
                                     key={i}
                                     isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
                                     onChange={() => handleCheckboxChange(tag.descriptor.name, item.value)}
@@ -120,11 +120,11 @@ const SubDetail = () => {
                     {item?.items[0]?.tags?.map((tag, index) => (
                         (tag.descriptor.name == 'Data formats' &&
 
-                            <Box key={index} mb={8}>
+                            <Box key={index} mb={9}>
                                 <FormLabel fontSize={12} fontWeight={600} display="flex">{tag.descriptor.name} <Box color="red" ml={1}>
                                     * </Box></FormLabel>
                                 {tag.list.map((item, i) => (
-                                    <Checkbox fontSize={12} ml={5}
+                                    <Checkbox fontSize={12} mr={'40px'}
                                         key={i}
                                         isChecked={selectedTags.some(selectedTag => selectedTag.descriptor.name === tag.descriptor.name && selectedTag.list.some(selectedItem => selectedItem.value === item.value))}
                                         onChange={() => handleCheckboxChange(tag.descriptor.name, item.value)}
@@ -142,8 +142,8 @@ const SubDetail = () => {
 
                 <Flex direction="row" wrap="wrap">
                     {item?.fulfillments?.map((fulfillment) => (
-                        <Box key={fulfillment.id} mr={3} mb={3} fontSize={12} ml={5}>
-                            <Radio
+                        <Box key={fulfillment.id} mr={3} mb={3} fontSize={12} >
+                            <Radio mr={'40px'}
                                 value={fulfillment.type}
                                 isChecked={selectedFulfillment === fulfillment.type}
                                 onChange={() => handleRadioChange(fulfillment.id, fulfillment.type)}
@@ -158,11 +158,11 @@ const SubDetail = () => {
                     {item?.items[0]?.tags?.map((tag, index) => (
                         (tag.descriptor.name == 'Subscription duration' &&
 
-                            <Box key={index} mb={8}>
+                            <Box key={index} mb={9}>
                                 <FormLabel fontSize={12} fontWeight={600} display="flex">{tag.descriptor.name}  <Box color="red" ml={1}>
                                     * </Box></FormLabel>
                                 {tag.list.map((item, i) => (
-                                    <Radio ml={5}
+                                    <Radio mr={'40px'}
                                         key={i}
                                         value={item.value}
                                         // isChecked={selectedDuration === item.value}
