@@ -189,7 +189,7 @@ const Search = () => {
                       minHeight="270px"
                       _hover={{ borderColor: "blue.400" }}
                       cursor="pointer"
-                      boxShadow="0px 20px 25px 0px rgba(0, 0, 0, 0.1)"
+                      boxShadow="rgba(0, 0, 0, 0.1) 7px 14px 17px -6px"
                       mb={6}
                       onClick={() => goTodetailPage(item)}
                       gap={"11px"}
