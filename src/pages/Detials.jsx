@@ -278,7 +278,7 @@ console.log("Is dataShare key set:", isDataShareSet);
                   objectFit="contain"
                 /></Box>
               <Box m={3}>
-                <Text fontSize={16} noOfLines={1} fontWeight="600" mb={2}>{item?.items[0]?.descriptor?.name}</Text>
+                <Text fontSize={17} noOfLines={1} fontWeight="600" mb={2}>{item?.items[0]?.descriptor?.name}</Text>
                 <HStack mb={2}>
                   <Text fontSize={15} fontWeight={600}>{t('PROVIDED_BY')} </Text>
                   <Text fontSize={15}>{item?.descriptor?.name} </Text>
