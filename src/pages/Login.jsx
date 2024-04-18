@@ -3,6 +3,10 @@ import { Box, Button, FormControl, FormLabel, Input, Text, Image, VStack, useThe
 import { header, buttonCss } from "../styles/branding";
 import { useTranslation } from "react-i18next";
 import poweredBy from '../assets/images/poweredby.png';
+import beckn from '../assets/images/footer.png';
+import welcometitle from '../assets/images/welcometitle.png';
+
+
 import { useNavigate } from 'react-router-dom';
 const env = import.meta.env;
 import { v4 as uuidv4 } from "uuid";
@@ -75,9 +79,15 @@ export default function Login() {
                 <Box maxW="500px" width="100%" bg="white" p={8} >
                     {/* Application Title Section */}
                     <Box mb={8} lineHeight="taller">
-                        <Text fontSize="4xl" fontWeight="bold">
+                        {/* <Text fontSize="4xl" fontWeight="bold">
                             {t('WELCOME_BACK')}
-                        </Text>
+                        </Text> */}
+                        <Image
+                                        src={welcometitle}
+                                        height={'25px'}
+                                        width={'190px'}
+                                        alt="title"
+                                    />
                         {/* <Text fontSize="1xl">
                         {t('LET_MAKE_EASY')}
                     </Text> */}
@@ -125,7 +135,7 @@ export default function Login() {
                                     />
                                 </FormControl>
                                { !isValid && <Text fontSize={12} width={'93%'} color={'#ff0000ad'} >{t('AUTHENTICATION_FAILED')}</Text> }
-                                <Button marginTop={5} type="button" onClick={handleLogin} variant="solid" width="100%" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
+                                <Button marginTop={5} fontWeight={400} borderRadius={'12px'} type="button" onClick={handleLogin} variant="solid" width="100%" background={buttonCss?.primaryBtnColor} color={buttonCss?.primaryTxtColor} _hover={{ bg: buttonCss?.primaryBtnHoverColor }}>
                                     {t('SIGN_IN')}
                                 </Button>
 
@@ -133,12 +143,20 @@ export default function Login() {
                                 <Text>{t('DONT_HAVE_ACCOUNT')}</Text>
                                 <Text color={buttonCss?.primaryBtnColor} ml={1}> {t('SIGN_UP')}</Text>
                             </Box> */}
-                                <Box ml={60} my={4}>
+                                <HStack  my={4} mt={'50px'} mx={20}>
                                     <Image
                                         src={poweredBy}
+                                        height={'21px'}
                                         alt="Forum Logo"
                                     />
-                                </Box>
+                                      <Image
+                                      height={'17px'}
+                                      marginBottom={1}
+                                        src={beckn}
+                                        alt="Forum Logo"
+                                    />
+                                   
+                                </HStack>
 
                             </VStack>
                         </form>
