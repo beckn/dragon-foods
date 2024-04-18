@@ -148,12 +148,13 @@ const SubDetail = () => {
         borderRadius="12px"
         border="1px solid rgba(191, 191, 191, 1)"
       >
-        {item?.items[0]?.tags?.map(
-          (tag, index) =>
+        {item?.items[0]?.tags?.map((tag, index, array) => {
+          const isLastItem = index === array.length - 1;
+          return (
             tag?.list?.length > 0 &&
-            tag.descriptor.name != "Subscription duration" &&
-            tag.descriptor.name != "Data formats" && (
-              <Box key={index} mb={9}>
+            tag.descriptor.name !== "Subscription duration" &&
+            tag.descriptor.name !== "Data formats" && (
+              <Box key={index} mb={isLastItem ? "0px" : "30px"}>
                 <FormLabel fontSize={12} fontWeight={600}>
                   {tag.descriptor.name}
                 </FormLabel>
@@ -181,7 +182,8 @@ const SubDetail = () => {
                 ))}
               </Box>
             )
-        )}
+          );
+        })}
       </Card>
 
       <Card
@@ -190,11 +192,11 @@ const SubDetail = () => {
         borderRadius="12px"
         border="1px solid rgba(191, 191, 191, 1)"
       >
-        <Flex direction="row" wrap="wrap">
+        <Flex direction="row" wrap="wrap" mb={30}>
           {item?.items[0]?.tags?.map(
             (tag, index) =>
               tag.descriptor.name == "Data formats" && (
-                <Box key={index} mb={9}>
+                <Box key={index}>
                   <FormLabel fontSize={12} fontWeight={600} display="flex">
                     {tag.descriptor.name}{" "}
                     <Box color="red" ml={1}>
@@ -234,9 +236,9 @@ const SubDetail = () => {
           </Box>
         </FormLabel>
 
-        <Flex direction="row" wrap="wrap">
+        <Flex direction="row" wrap="wrap" mb={30}>
           {item?.fulfillments?.map((fulfillment) => (
-            <Box key={fulfillment.id} mr={3} mb={3} fontSize={12}>
+            <Box key={fulfillment.id} mr={3} fontSize={12}>
               <Radio
                 mr={"40px"}
                 value={fulfillment.type}
@@ -257,7 +259,7 @@ const SubDetail = () => {
           {item?.items[0]?.tags?.map(
             (tag, index) =>
               tag.descriptor.name == "Subscription duration" && (
-                <Box key={index} mb={9}>
+                <Box key={index}>
                   <FormLabel fontSize={12} fontWeight={600} display="flex">
                     {tag.descriptor.name}{" "}
                     <Box color="red" ml={1}>
