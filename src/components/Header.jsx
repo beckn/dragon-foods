@@ -23,20 +23,21 @@ import { header, buttonCss } from "../styles/branding";
 import appConfig from "../assets/ui-config/homeConfig.json";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdOutlineHistory } from "react-icons/md";
-import { useLocation } from "react-router-dom"; 
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import orderhistory from "../assets/images/orderhistory.svg";
 
 function Header() {
   const { t } = useTranslation();
-  const location = useLocation(); 
+  const location = useLocation();
   const navigate = useNavigate();
 
   // Check if the current path is "/"
   const isHomePage = location.pathname === "/";
 
   const handleOrderHistoryClick = () => {
-    navigate('/orderhistory');
-};
+    navigate("/orderhistory");
+  };
 
   return (
     <Box>
@@ -63,10 +64,10 @@ function Header() {
             />
           )}
           <Image
-              src={header?.headerContent?.headerLogo}
-              alt="Forum Logo"
-              marginRight="2"
-            />
+            src={header?.headerContent?.headerLogo}
+            alt="Forum Logo"
+            marginRight="2"
+          />
         </Flex>
 
         {/* Right-hand side */}
@@ -80,13 +81,36 @@ function Header() {
               _hover={{
                 bg: "none",
                 border: "none",
-                color: "inherit",
+                color: "#000",
+                padding: "0",
+              }}
+              _active={{
+                bg: "none",
+                border: "none",
+                color: "#000",
                 padding: "0",
               }}
             />
             <MenuList>
-              <MenuItem icon={<MdOutlineHistory fontSize="1.5em"/>} onClick={handleOrderHistoryClick}>
-               {t('ORDER_HISTORY')}
+              <MenuItem
+                onClick={handleOrderHistoryClick}
+                _hover={{
+                  bg: "none",
+                  color: "#000",
+                }}
+                _active={{
+                  bg: "none",
+                  color: "#000",
+                }}
+              >
+                <img
+                  src={orderhistory}
+                  alt="Order History"
+                  width="24"
+                  height="24"
+                  style={{ marginRight: "10px" }}
+                />
+                {t("ORDER_HISTORY")}
               </MenuItem>
             </MenuList>
           </Menu>
