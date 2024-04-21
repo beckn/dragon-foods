@@ -26,9 +26,9 @@ import { useTranslation } from "react-i18next";
 import { MdFilterList } from "react-icons/md";
 import onSearch from "../assets/apiJson/on_search.json";
 import SubHeader from "../components/SubHeader";
-import Footer from '../components/Footer';
-import { useLocation } from 'react-router-dom';
-import Loader from '../components/Loader';
+import Footer from "../components/Footer";
+import { useLocation } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -54,73 +54,69 @@ const Home = () => {
   }, []);
 
   const searchResponse = async () => {
+    try {
+      console.log({ env });
+      let bodyData = {
+        context: {
+          domain: env?.VITE_DOMAIN,
+          action: "search",
+          version: "1.1.0",
+          bap_id: env?.VITE_BAP_ID,
+          bap_uri: env?.VITE_BAP_URI,
+          transaction_id: transactionId,
+          message_id: uuidv4(),
+          timestamp: new Date().toISOString(),
+        },
+        message: {
+          intent: {},
+        },
+      };
 
-    try{
-    console.log({ env });
-    let bodyData = {
-      context: {
-        domain: env?.VITE_DOMAIN,
-        action: "search",
-        version: "1.1.0",
-        bap_id: env?.VITE_BAP_ID,
-        bap_uri: env?.VITE_BAP_URI,
-        transaction_id: transactionId,
-        message_id: uuidv4(),
-        timestamp: new Date().toISOString(),
-      },
-      message: {
-        intent: {
-      },
-    }};
+      if (state?.searchTxt) {
+        bodyData["message"]["intent"]["item"] = {
+          descriptor: {
+            name: state?.searchTxt,
+          },
+        };
+      }
 
-    if(state?.searchTxt)
-    {
-      bodyData['message']['intent']['item']= {
-        "descriptor": {
-            "name": state?.searchTxt
-        }
-    }
-  }
-
-    if(state?.location)
-    {
-      bodyData['message']['intent']['fulfillment'] =  {
-        "stops": [
+      if (state?.location) {
+        bodyData["message"]["intent"]["fulfillment"] = {
+          stops: [
             {
-                "location": {
-                    "city": {
-                      "name": state?.location
-                    }
-                }
-            }
-        ]
-    }
-    }
-
-    if(state?.year)
-    {
-      bodyData['message']['intent']['tags'] =  [
-        {
-            "descriptor": {
-                "name": "operation"
+              location: {
+                city: {
+                  name: state?.location,
+                },
+              },
             },
-            "value": state?.year
-        }
-    ]
-    }
+          ],
+        };
+      }
 
-    let response = await getallContent(bodyData);
-    setLoading(false);
+      if (state?.year) {
+        bodyData["message"]["intent"]["tags"] = [
+          {
+            descriptor: {
+              name: "operation",
+            },
+            value: state?.year,
+          },
+        ];
+      }
 
-   // setItems(response?.responses[0]?.message?.catalog);
-    setItems(response?.responses);
+      let response = await getallContent(bodyData);
+      setLoading(false);
 
-    setResContext(response?.responses[0]?.context);
-    setRes(response?.responses);
+      // setItems(response?.responses[0]?.message?.catalog);
+      setItems(response?.responses);
 
-    console.log(response);
+      setResContext(response?.responses[0]?.context);
+      setRes(response?.responses);
 
-   /* if (
+      console.log(response);
+
+      /* if (
       response &&
       response.data &&
       response.data[env?.VITE_DB_CACHE] &&
@@ -166,9 +162,9 @@ const Home = () => {
     } else {
       console.error("Invalid response format");
     }*/
-  } catch (error) {
-    console.error("Error performing search:", error);
-  }
+    } catch (error) {
+      console.error("Error performing search:", error);
+    }
   };
 
   //Filter functionality
@@ -199,6 +195,14 @@ const Home = () => {
         setStory(response.data.data[env?.VITE_DB_CACHE]);
       } else {
         // Handle no data
+        <Box
+          background={"#EFEFEF"}
+          textAlign={"center"}
+          padding={5}
+          width={"100%"}
+        >
+          {t("NO_data_available")}
+        </Box>;
       }
     } catch (error) {
       console.error("Error performing search:", error);
@@ -255,85 +259,97 @@ const Home = () => {
   return (
     <>
       <SubHeader title={t("SEARCH_RESULT")} cartItemCount={2} />
-      {loading ? (<Loader />
+      {loading ? (
+        <Loader />
       ) : (
-      <Box p={4} marginBottom="60px"  marginTop="30px" marginX={{ base: 4, md: 8, lg: 16 }}>
-        {/* search bar */}
-        <HStack alignItems="center" marginBottom={'30px'} width={'355px'}>
-
-          {uiConfig?.isSearch && (
-            <InputGroup flex="0.5" mr={'10px'}  
-            height={'48px'}>
-              <Input
-                type="text"
-                borderColor="#C9C9C9"
-                width={'355px'}
-                borderRadius={12}
-                placeholder={searchPlaceholder}
-                defaultValue={searchPlaceholder} // Set default value here
-                readOnly
-                value={inputValue}
-               onChange={handleChange}
+        <Box
+          p={4}
+          marginBottom="60px"
+          marginTop="30px"
+          marginX={{ base: 4, md: 8, lg: 16 }}
+        >
+          {/* search bar */}
+          <HStack alignItems="center" marginBottom={"30px"} width={"355px"}>
+            {uiConfig?.isSearch && (
+              <InputGroup flex="0.5" mr={"10px"} height={"48px"}>
+                <Input
+                  type="text"
+                  borderColor="#C9C9C9"
+                  width={"355px"}
+                  borderRadius={12}
+                  placeholder={searchPlaceholder}
+                  defaultValue={searchPlaceholder} // Set default value here
+                  readOnly
+                  value={inputValue}
+                  onChange={handleChange}
+                />
+                <InputRightElement onClick={handleClear} cursor="pointer">
+                  {inputValue ? (
+                    <RxCrossCircled color="gray.300" />
+                  ) : (
+                    <IoIosSearch color="gray.300" />
+                  )}
+                </InputRightElement>
+              </InputGroup>
+            )}
+            {uiConfig?.isAdvFilter && (
+              <IconButton
+                aria-label="Filter"
+                icon={<MdFilterList />}
+                onClick={() => setSelectedFilter("")}
+                variant="ghost"
+                mb={1}
+                fontSize="24px"
               />
-              <InputRightElement onClick={handleClear} cursor="pointer">
-                {inputValue ? (
-                  <RxCrossCircled color="gray.300" />
-                ) : (
-                  <IoIosSearch color="gray.300" />
-                )}
-              </InputRightElement>
-            </InputGroup>
-          )}
-          {uiConfig?.isAdvFilter && (
-            <IconButton
-              aria-label="Filter"
-              icon={<MdFilterList />}
-              onClick={() => setSelectedFilter("")}
-              variant="ghost"
-              mb={1}
-              fontSize="24px"
-            />
-          )}
-        </HStack>
+            )}
+          </HStack>
 
-        {inputValue.length > 0 ? (
-          <SearchScreen
-            searchText={visibleResults}
-            transactionId={transactionId}
-          />
-        ) : (
-          <>
-            {/* <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
+          {inputValue.length > 0 ? (
+            <SearchScreen
+              searchText={visibleResults}
+              transactionId={transactionId}
+            />
+          ) : (
+            <>
+              {/* <Text fontSize="12px" fontWeight="400" lineHeight="18px" mt={4}>
               {t('PRICE_WILL_VARY')}
             </Text> */}
-            <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
-              {items?.map(
-                (item, index) => (
+              <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4} pt={4}>
+                {items?.map((item, index) => (
                   <CourseCard
                     key={index}
                     item={item}
                     resContext={resContext}
                     transactionId={transactionId}
                   />
-                )
+                ))}
+              </SimpleGrid>
+
+              {!items?.length && (
+                <Box
+                  background={"#EFEFEF"}
+                  textAlign={"center"}
+                  padding={5}
+                  width={"100%"}
+                >
+                  {t("NO_data_available")}
+                </Box>
               )}
-            </SimpleGrid>
 
-           { !items?.length && (
-              <Box background={"#EFEFEF"} textAlign={'center'} padding={5} width={'100%'}>{t("NO_data_available")}</Box>
-            )} 
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(items?.length / itemsPerPage)}
+                handlePageChange={handlePageChange}
+              />
+            </>
+          )}
+        </Box>
+      )}
 
-            <Pagination
-              currentPage={currentPage}
-              totalPages={Math.ceil(items?.length / itemsPerPage)}
-              handlePageChange={handlePageChange}
-            />
-          </>
-        )}
-      </Box>)}
-
-      <Box mt={100}> <Footer /> </Box>
-      
+      <Box mt={100}>
+        {" "}
+        <Footer />{" "}
+      </Box>
     </>
   );
 };

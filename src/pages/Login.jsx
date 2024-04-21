@@ -55,7 +55,9 @@ export default function Login() {
               }};
   
               let response = await getallContent(bodyData);
+              console.log('i am getting data outside :', response);
               if(response.responses.length){
+                console.log('i am getting data :', response);
               localStorage.setItem('frequentlyData', JSON.stringify(response?.responses));
               // Set a timeout to clear the frequentData after 30 minutes
                 setTimeout(() => {
