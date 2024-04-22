@@ -195,14 +195,7 @@ const Home = () => {
         setStory(response.data.data[env?.VITE_DB_CACHE]);
       } else {
         // Handle no data
-        <Box
-          background={"#EFEFEF"}
-          textAlign={"center"}
-          padding={5}
-          width={"100%"}
-        >
-          {t("NO_data_available")}
-        </Box>;
+        setStory([]);
       }
     } catch (error) {
       console.error("Error performing search:", error);
