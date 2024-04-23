@@ -192,9 +192,11 @@ const Home = () => {
         response.data.data &&
         response.data.data[env?.VITE_DB_CACHE]
       ) {
+        console.log('enter1');
         setStory(response.data.data[env?.VITE_DB_CACHE]);
       } else {
         // Handle no data
+        console.log('enter2');
         setStory([]);
       }
     } catch (error) {
@@ -325,6 +327,7 @@ const Home = () => {
                   padding={5}
                   width={"100%"}
                 >
+                  {console.log('items',items)}
                   {t("NO_data_available")}
                 </Box>
               )}
